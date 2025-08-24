@@ -4,3 +4,12 @@ extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autoli
 rootProject.name = 'QRGeneratorApp'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS) // Less strict, allows project-level repos
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+    }
+}
