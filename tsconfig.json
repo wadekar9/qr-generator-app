@@ -7,11 +7,11 @@
     "allowJs": false,
     "jsx": "react-native",
     "noImplicitAny": true,
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "target": "ESNext",
     "lib": [
-      "ES7"
+      "ESNext"
     ],
     "paths": {
       "$assets/*": [
