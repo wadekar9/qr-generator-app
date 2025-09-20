@@ -1614,7 +1614,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNCPicker (2.11.1):
+  - RNCAsyncStorage (2.2.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1887,7 +1887,7 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
-  - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
@@ -2038,8 +2038,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNBootSplash:
     :path: "../node_modules/react-native-bootsplash"
-  RNCPicker:
-    :path: "../node_modules/@react-native-picker/picker"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageCropPicker:
@@ -2122,7 +2122,7 @@ SPEC CHECKSUMS:
   ReactCodegen: 8e673528b686d334cfa785515d9c9b14bcb272d8
   ReactCommon: 7ea8ee50e489e9cc75922f19a06ea45c1b59b4bd
   RNBootSplash: 6ed1ef5a85f5c57871a7461696617420574c69e0
-  RNCPicker: 9710a2110f506b9a9541044c04df290730b3a78a
+  RNCAsyncStorage: efa02b644121f4e1f7f33e712f4f82c30aa4ff4a
   RNGestureHandler: ab7287c9593b75911be221b6c97d7ae6e02652e6
   RNImageCropPicker: 24d000ef063f9867e98e68585ff947b55fab15c7
   RNPermissions: 10b454768bd94c07806e5641ac86bfff46258294
