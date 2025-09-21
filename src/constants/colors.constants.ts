@@ -60,7 +60,7 @@ export const COLORS = {
         gray5: '#1C1C1E',
 
         text: '#FFFFFF',
-        text1: '#EBEBF599',
+        text1: '#FFFFFF',
         text2: '#EBEBF54C',
         text3: '#EBEBF52D',
         text4: '#8E8E93',

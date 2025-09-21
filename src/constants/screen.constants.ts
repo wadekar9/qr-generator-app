@@ -5,6 +5,7 @@ export enum EStackScreens {
     PRIVACY_POLICY = 'PrivacyPolicy',
     QR_SCANNER = 'QRScanner',
     QR_GENERATOR = 'QRGenerator',
+    SOCIAL_QR_GENERATOR = 'SocialQRGenerator',
 }
 
 export enum EBottomTabScreens {

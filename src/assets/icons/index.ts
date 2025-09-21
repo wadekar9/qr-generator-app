@@ -1,3 +1,9 @@
-
 export { default as Home } from './home.svg'
 export { default as Setting } from './setting.svg'
+export { default as WhatsApp } from './whatsapp.svg'
+export { default as Telegram } from './telegram.svg'
+export { default as LinkedIn } from './linkedin.svg'
+export { default as Discord } from './discord.svg'
+export { default as YouTube } from './youtube.svg'
+export { default as Instagram } from './instagram.svg'
+export { default as XTwitter } from './x-twitter.svg'
