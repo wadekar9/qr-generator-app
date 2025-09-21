@@ -8,7 +8,7 @@ import { TabBarNavigator, TabBarButton } from '$components/navigation';
 import { BottomTabBarProps, BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
 import { BottomTabsRoutes } from './routes';
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants';
-import { Warehouse, Settings } from 'lucide-react-native';
+import { Home, Setting } from '$assets/icons';
 
 const BottomTab = createBottomTabNavigator<BottomTabStackParamsList>();
 
@@ -33,8 +33,9 @@ const BottomTabNavigator: React.FC<RootStackScreenProps<EStackScreens.BOTTOM_TAB
                     tabBarButton: (props: BottomTabBarButtonProps) => (
                         <TabBarButton
                             key={'home'}
+                            label={'Home'}
                             theme={theme}
-                            icon={({ color }) => <Warehouse fill={color} width={moderateScale(28)} height={moderateScale(28)} />} {...props} />
+                            icon={({ color }) => <Home fill={color} width={moderateScale(28)} height={moderateScale(28)} />} {...props} />
                     )
                 }}
             />
@@ -46,8 +47,9 @@ const BottomTabNavigator: React.FC<RootStackScreenProps<EStackScreens.BOTTOM_TAB
                     tabBarButton: (props: BottomTabBarButtonProps) => (
                         <TabBarButton
                             key={'settings'}
+                            label={'Settings'}
                             theme={theme}
-                            icon={({ color }) => <Settings fill={color} width={moderateScale(28)} height={moderateScale(28)} />} {...props} />
+                            icon={({ color }) => <Setting fill={color} width={moderateScale(28)} height={moderateScale(28)} />} {...props} />
                     )
                 }}
             />

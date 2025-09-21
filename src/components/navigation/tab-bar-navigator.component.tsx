@@ -5,6 +5,9 @@ import { ITheme } from '$types/common.types';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { DEVICE_WIDTH, moderateScale } from '$constants/styles.constants';
 import { COLORS } from '$constants/colors.constants';
+import { IconButton } from '$components/ui';
+import { ScanQrCode } from 'lucide-react-native';
+import { EStackScreens } from '$constants/screen.constants';
 
 interface TabBarNavigatorProps extends BottomTabBarProps {
     theme: ITheme;
@@ -18,7 +21,7 @@ const TabBarNavigator: React.FC<TabBarNavigatorProps> = ({ state, descriptors, n
     const styles = styling(theme);
 
     return (
-        <View style={[styles.wrapper, { bottom: insets.bottom || moderateScale(24) }]}>
+        <View style={[styles.wrapper, { bottom: insets.bottom || moderateScale(20) }]}>
             <View style={styles.container}>
                 {state.routes.map((route, index) => {
                     const { options } = descriptors[route.key];
@@ -64,6 +67,9 @@ const TabBarNavigator: React.FC<TabBarNavigatorProps> = ({ state, descriptors, n
                         />
                     )
                 })}
+                <IconButton style={styles.middleButton} onPress={() => navigation.navigate(EStackScreens.QR_SCANNER)}>
+                    <ScanQrCode stroke={COLORS[theme].white} width={moderateScale(24)} height={moderateScale(24)} />
+                </IconButton>
             </View>
         </View>
     );
@@ -76,37 +82,45 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
         height: '100%',
         flexDirection: 'row',
-        backgroundColor: COLORS[theme].background1,
-        borderRadius: moderateScale(50),
-        overflow: 'hidden'
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderTopWidth: 0
     },
     wrapper: {
         width: TAB_BAR_WIDTH,
-        height: moderateScale(55),
+        height: moderateScale(70),
+        borderRadius: moderateScale(100),
         alignSelf: 'center',
-        position: 'absolute',
-        borderRadius: moderateScale(50),
+        backgroundColor: COLORS[theme].background1,
+        borderTopWidth: 0,
         borderWidth: moderateScale(1),
         borderColor: COLORS[theme].border,
         shadowColor: COLORS[theme].black,
         shadowOffset: {
             width: 0,
-            height: 2,
+            height: 0,
         },
         shadowOpacity: 0.15,
-        shadowRadius: 6,
-        elevation: 2
+        shadowRadius: 0.5,
+        elevation: 0,
+        position: 'absolute',
     },
-    indicatorWrapper: {
-        ...StyleSheet.absoluteFillObject,
+    section: {
+        flex: 1,
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        backgroundColor: COLORS[theme].primary
+        justifyContent: 'center'
     },
-    indicator: {
-        width: moderateScale(24),
-        height: moderateScale(2),
+    middleButton: {
+        position: 'absolute',
+        height: moderateScale(65),
+        width: moderateScale(65),
         backgroundColor: COLORS[theme].primary,
-        bottom: moderateScale(6)
+        borderRadius: moderateScale(100),
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        top: moderateScale(-28),
+        borderWidth: moderateScale(5),
+        borderColor: COLORS[theme].gray4
     }
 });

@@ -3,17 +3,20 @@ import React from 'react'
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs'
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { ITheme } from '$types/common.types';
+import { ThemeText } from '$components/ui';
+import { COLORS } from '$constants/colors.constants';
 
 interface TabBarButtonProps extends BottomTabBarButtonProps {
     theme: ITheme;
+    label: string;
     icon: (args: { color: string }) => React.ReactNode;
 }
 
 const TabBarButton: React.FC<TabBarButtonProps> = (props) => {
 
-    const { accessibilityState, onPress, onLongPress, icon } = props;
+    const { accessibilityState, onPress, onLongPress, icon, theme, label } = props;
 
-    const isFocused = accessibilityState?.selected;
+    const color = accessibilityState?.selected ? COLORS[theme].primary : COLORS[theme].gray1;
 
     return (
         <TouchableOpacity
@@ -22,7 +25,8 @@ const TabBarButton: React.FC<TabBarButtonProps> = (props) => {
             onLongPress={onLongPress!}
             style={styles.container}
         >
-            {icon({ color: isFocused ? '#000' : '#8F8F8F' })}
+            {icon({ color })}
+            <ThemeText theme={theme} variant="h4" style={[styles.label, { color }]}>{label}</ThemeText>
         </TouchableOpacity>
     )
 }
@@ -36,7 +40,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     label: {
-        fontFamily: EFonts.BOLD,
+        fontFamily: EFonts.SEMI_BOLD,
         fontSize: moderateScale(12),
         textAlign: 'center',
         lineHeight: moderateScale(20)
