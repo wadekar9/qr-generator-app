@@ -30,13 +30,18 @@ export const COLORS = {
         text1: '#3C3C4399',
         text2: '#3C3C434C',
         text3: '#3C3C432D',
+        text4: '#6B7280',
 
         background: '#FFFFFF',
         background1: '#FAFAFA',
         background2: '#F5F5F5',
         background3: '#D1D1D6',
+        background4: '#FFFFFF',
+
+        surface: '#F8F9FA',
 
         border: '#D1D1D6',
+        border1: '#E5E7EB',
 
         shadow: palette.transparent25,
 
@@ -58,19 +63,25 @@ export const COLORS = {
         text1: '#EBEBF599',
         text2: '#EBEBF54C',
         text3: '#EBEBF52D',
+        text4: '#8E8E93',
 
         background: '#0D0D0D',
         background1: '#161616',
         background2: '#1B1B1B',
         background3: '#3A3A3C',
+        background4: '#000000',
 
         shadow: palette.transparent50,
 
         border: '#4A4A4A',
+        border1: '#38383A',
 
         error: palette.red,
         success: palette.green,
         warning: palette.orange,
+
+        surface: '#1C1C1E',
+
         ...palette,
     },
 } as const;

@@ -1,13 +1,85 @@
-import { View, Text } from 'react-native';
 import React from 'react';
-import { BottomTabStackScreenProps } from '$types/navigation.types';
-import { EBottomTabScreens } from '$constants/screen.constants';
+import {
+    Linking,
+    ScrollView,
+    Share as ShareNative
+} from 'react-native';
+import {
+    Moon,
+    Sun,
+    Shield,
+    FileText,
+    Smartphone,
+    Share
+} from 'lucide-react-native';
+import { BottomTabStackScreenProps, rootStackNavigationRef } from '$types/navigation.types';
+import { EBottomTabScreens, EStackScreens } from '$constants/screen.constants';
+import { useAppTheme } from '$hooks/common';
+import { ThemedSafeAreaView } from '$components/containers';
+import { styling } from './styles';
+import { SettingsItem } from '$components/layouts';
+import { BaseSwitch, ThemeText } from '$components/ui';
 
 const Settings: React.FC<BottomTabStackScreenProps<EBottomTabScreens.SETTINGS>> = () => {
+
+    const { theme, insets, colors, changeTheme } = useAppTheme();
+    const styles = styling(theme, insets);
+
+    const toggleTheme = () => {
+        changeTheme(theme == 'dark' ? 'light' : 'dark');
+    };
+
     return (
-        <View>
-            <Text>Settings</Text>
-        </View>
+        <ThemedSafeAreaView>
+            <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+                <ThemeText theme={theme} style={[styles.title]}>Settings</ThemeText>
+
+                <SettingsItem
+                    theme={theme}
+                    Icon={theme == 'dark' ? <Moon color={colors.primary} width={24} height={24} /> : <Sun color={colors.primary} width={24} height={24} />}
+                    title="Dark Mode"
+                    subtitle={theme == 'dark' ? 'Dark theme enabled' : 'Light theme enabled'}
+                    rightElement={
+                        <BaseSwitch
+                            value={theme == 'dark'}
+                            onValueChange={toggleTheme}
+                        />
+                    }
+                />
+
+                <SettingsItem
+                    theme={theme}
+                    Icon={<FileText color={colors.primary} width={24} height={24} />}
+                    title="History"
+                    subtitle="View your generated code history"
+                    onPress={() => rootStackNavigationRef.current?.navigate(EStackScreens.HISTORY)}
+                />
+
+                <SettingsItem
+                    theme={theme}
+                    Icon={<Shield color={colors.primary} width={24} height={24} />}
+                    title="Privacy Policy"
+                    subtitle="How we handle your data"
+                    onPress={() => rootStackNavigationRef.current?.navigate(EStackScreens.PRIVACY_POLICY)}
+                />
+
+                <SettingsItem
+                    theme={theme}
+                    Icon={<Share color={colors.primary} width={24} height={24} />}
+                    title="Share"
+                    subtitle="Share app with friends"
+                    onPress={() => ShareNative.share({ message: 'QR Generator App' })}
+                />
+
+                <SettingsItem
+                    theme={theme}
+                    Icon={<Smartphone color={colors.primary} width={24} height={24} />}
+                    title="Rate App"
+                    subtitle="Help us improve"
+                    onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.qrgeneratorapp')}
+                />
+            </ScrollView>
+        </ThemedSafeAreaView>
     );
 };
 
