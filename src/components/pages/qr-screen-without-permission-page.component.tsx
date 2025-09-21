@@ -1,0 +1,69 @@
+import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import { ITheme } from '$types/common.types';
+import { Camera } from 'lucide-react-native';
+import { COLORS } from '$constants/colors.constants';
+import { moderateScale } from '$constants/styles.constants';
+
+interface QRScreenWithoutPermissionPageProps {
+    theme: ITheme;
+    requestPermission: () => void;
+}
+
+const QRScreenWithoutPermissionPage: React.FC<QRScreenWithoutPermissionPageProps> = (props) => {
+
+    const styles = styling(props.theme);
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <View style={styles.container}>
+                <Camera size={64} color={COLORS[props.theme].text4} />
+                <Text style={[styles.message, { color: COLORS[props.theme].text }]}>
+                    Camera permission is required to scan QR codes
+                </Text>
+                <TouchableOpacity
+                    style={[styles.permissionButton, { backgroundColor: COLORS[props.theme].primary }]}
+                    onPress={props.requestPermission}
+                >
+                    <Text style={styles.permissionButtonText}>Grant Permission</Text>
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
+    )
+}
+
+export default QRScreenWithoutPermissionPage
+
+const styling = (theme: ITheme) => StyleSheet.create({
+    container: {
+        flex: 1,
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: moderateScale(15),
+        padding: moderateScale(18),
+        backgroundColor: COLORS[theme].surface
+    },
+    message: {
+        fontSize: 18,
+        textAlign: 'center',
+        marginVertical: 20,
+        lineHeight: 24,
+    },
+    subMessage: {
+        fontSize: 14,
+        textAlign: 'center',
+        marginTop: 8,
+    },
+    permissionButton: {
+        paddingHorizontal: 24,
+        paddingVertical: 12,
+        borderRadius: 8,
+        marginTop: 20,
+    },
+    permissionButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '600',
+    },
+})

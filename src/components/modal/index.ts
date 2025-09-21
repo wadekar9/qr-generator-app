@@ -1,0 +1,1 @@
+export { default as CameraPermissionPromptModal } from './camera-permission-prompt-modal.component';
