@@ -1,0 +1,100 @@
+import React, { useRef, useEffect } from 'react';
+import {
+    StyleSheet,
+    TouchableOpacity,
+    Animated
+} from 'react-native';
+import { moderateScale } from '$constants/styles.constants';
+import { useAppTheme } from '$hooks/common';
+import { ITheme } from '$types/common.types';
+import { COLORS } from '$constants/colors.constants';
+
+interface BaseSwitchProps {
+    value: boolean;
+    onValueChange: (value: boolean) => void;
+    disabled?: boolean;
+}
+
+const DEFAULT_DIMENSIONS = {
+    width: moderateScale(60),
+    height: moderateScale(35),
+    radius: moderateScale(100),
+    circleSize: moderateScale(28),
+    circleRadius: moderateScale(100),
+};
+
+const BaseSwitch: React.FC<BaseSwitchProps> = ({
+    value,
+    onValueChange,
+    disabled = false,
+}) => {
+    const { theme } = useAppTheme();
+    const styles = createStyles(theme);
+
+    const opacityAnim = useRef(new Animated.Value(value ? 1 : 0)).current;
+    const translateXAnim = useRef(new Animated.Value(value ? DEFAULT_DIMENSIONS.circleSize : 4)).current;
+
+    useEffect(() => {
+        Animated.parallel([
+            Animated.timing(opacityAnim, {
+                toValue: value ? 1 : 0,
+                duration: 200,
+                useNativeDriver: false,
+            }),
+            Animated.timing(translateXAnim, {
+                toValue: value ? DEFAULT_DIMENSIONS.circleSize : 4,
+                duration: 200,
+                useNativeDriver: false,
+            }),
+        ]).start();
+    }, [value, opacityAnim, translateXAnim]);
+
+    const handlePress = () => {
+        if (!disabled) {
+            onValueChange(!value);
+        }
+    };
+
+    return (
+        <TouchableOpacity
+            activeOpacity={0.75}
+            style={[styles.wrapper, disabled && styles.disabledWrapper]}
+            onPress={handlePress}
+            disabled={disabled}
+        >
+            <Animated.View style={[styles.background, { opacity: opacityAnim }]} />
+            <Animated.View style={[styles.circle, { transform: [{ translateX: translateXAnim }] }]} />
+        </TouchableOpacity>
+    );
+};
+
+export default React.memo(BaseSwitch);
+
+const createStyles = (theme: ITheme) => StyleSheet.create({
+    wrapper: {
+        width: DEFAULT_DIMENSIONS.width,
+        height: DEFAULT_DIMENSIONS.height,
+        backgroundColor: COLORS[theme].gray1,
+        borderRadius: DEFAULT_DIMENSIONS.radius,
+        overflow: 'hidden',
+        justifyContent: 'center'
+    },
+    disabledWrapper: {
+        opacity: 0.5,
+    },
+    background: {
+        position: 'absolute',
+        backgroundColor: COLORS[theme].primary,
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+    },
+    circle: {
+        height: DEFAULT_DIMENSIONS.circleSize,
+        width: DEFAULT_DIMENSIONS.circleSize,
+        backgroundColor: COLORS[theme].white,
+        borderRadius: DEFAULT_DIMENSIONS.circleRadius,
+        marginVertical: 2,
+        zIndex: 1,
+    }
+});

@@ -23,13 +23,13 @@ const BottomTabNavigator: React.FC<RootStackScreenProps<EStackScreens.BOTTOM_TAB
             screenOptions={{
                 headerStyle: { backgroundColor: colors.background1 },
                 headerTitleStyle: [styles.headerText, { color: colors.text }],
+                headerShown: false
             }}
         >
             <BottomTab.Screen
                 name={EBottomTabScreens.HOME}
                 component={BottomTabsRoutes.Home}
                 options={{
-                    headerTitle: 'Home',
                     tabBarButton: (props: BottomTabBarButtonProps) => (
                         <TabBarButton
                             key={'home'}
@@ -43,7 +43,6 @@ const BottomTabNavigator: React.FC<RootStackScreenProps<EStackScreens.BOTTOM_TAB
                 name={EBottomTabScreens.SETTINGS}
                 component={BottomTabsRoutes.Settings}
                 options={{
-                    headerTitle: 'Settings',
                     tabBarButton: (props: BottomTabBarButtonProps) => (
                         <TabBarButton
                             key={'settings'}

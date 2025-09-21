@@ -12,7 +12,7 @@ import {
     Smartphone,
     Share
 } from 'lucide-react-native';
-import { BottomTabStackScreenProps, rootStackNavigationRef } from '$types/navigation.types';
+import { BottomTabStackScreenProps, stackNavigationRef } from '$types/navigation.types';
 import { EBottomTabScreens, EStackScreens } from '$constants/screen.constants';
 import { useAppTheme } from '$hooks/common';
 import { ThemedSafeAreaView } from '$components/containers';
@@ -52,7 +52,7 @@ const Settings: React.FC<BottomTabStackScreenProps<EBottomTabScreens.SETTINGS>> 
                     Icon={<FileText color={colors.primary} width={24} height={24} />}
                     title="History"
                     subtitle="View your generated code history"
-                    onPress={() => rootStackNavigationRef.current?.navigate(EStackScreens.HISTORY)}
+                    onPress={() => stackNavigationRef.current?.navigate(EStackScreens.HISTORY)}
                 />
 
                 <SettingsItem
@@ -60,7 +60,7 @@ const Settings: React.FC<BottomTabStackScreenProps<EBottomTabScreens.SETTINGS>> 
                     Icon={<Shield color={colors.primary} width={24} height={24} />}
                     title="Privacy Policy"
                     subtitle="How we handle your data"
-                    onPress={() => rootStackNavigationRef.current?.navigate(EStackScreens.PRIVACY_POLICY)}
+                    onPress={() => stackNavigationRef.current?.navigate(EStackScreens.PRIVACY_POLICY)}
                 />
 
                 <SettingsItem

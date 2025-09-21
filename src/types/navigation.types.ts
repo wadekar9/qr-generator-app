@@ -12,9 +12,9 @@ export type RootStackParamsList = {
     [EStackScreens.SPLASH]: undefined;
     [EStackScreens.BOTTOM_TAB_NAVIGATOR]: undefined;
     [EStackScreens.HISTORY]: undefined;
-    [EStackScreens.ABOUT_US]: undefined;
     [EStackScreens.QR_SCANNER]: undefined;
     [EStackScreens.QR_GENERATOR]: undefined;
+    [EStackScreens.PRIVACY_POLICY]: undefined;
 }
 
 export type RootStackScreenProps<T extends keyof RootStackParamsList> = NativeStackScreenProps<RootStackParamsList, T>;
@@ -23,4 +23,4 @@ export type RootStackNavigationProps = NativeStackNavigationProp<RootStackParams
 export type BottomTabStackScreenProps<T extends keyof BottomTabStackParamsList> = BottomTabScreenProps<BottomTabStackParamsList, T>;
 export type BottomTabStackNavigationProps = BottomTabNavigationProp<BottomTabStackParamsList>;
 
-export const rootStackNavigationRef = createNavigationContainerRef<RootStackParamsList>();
+export const stackNavigationRef = createNavigationContainerRef<RootStackParamsList>();

@@ -3,12 +3,12 @@ import React from 'react';
 import { RootStackScreenProps } from '$types/navigation.types';
 import { EStackScreens } from '$constants/screen.constants';
 
-const AboutUs: React.FC<RootStackScreenProps<EStackScreens.ABOUT_US>> = () => {
+const PrivacyPolicy: React.FC<RootStackScreenProps<EStackScreens.PRIVACY_POLICY>> = () => {
     return (
         <View>
-            <Text>AboutUs</Text>
+            <Text>PrivacyPolicy</Text>
         </View>
     );
 };
 
-export default AboutUs;
+export default PrivacyPolicy;
