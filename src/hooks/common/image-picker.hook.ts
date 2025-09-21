@@ -1,14 +1,16 @@
+import { IMediaFile } from '$types/common.types';
+import { generateImageFileSchema } from '$utils/helpers';
 import { requestCameraPermissions, requestMediaPermissions } from '$utils/permissions';
-import { openCamera, openPicker, ImageOrVideo } from 'react-native-image-crop-picker';
+import { openCamera as openCameraPicker, openPicker } from 'react-native-image-crop-picker';
 
-export const useImagePicker = (onSelect: (e: ImageOrVideo) => void, onPermissionFailed?: (mode: 'media' | 'camera') => void) => {
+export const useImagePicker = (onSelect: (e: IMediaFile) => void, onPermissionFailed?: (mode: 'media' | 'camera') => void) => {
 
-    const handleOpenGallery = async () => {
+    const openGallery = async () => {
         try {
 
-            const isPermissionAvailable = await requestMediaPermissions();
+            const permission = await requestMediaPermissions();
 
-            if (!isPermissionAvailable) {
+            if (!permission) {
                 onPermissionFailed && onPermissionFailed('media');
                 return;
             }
@@ -16,32 +18,32 @@ export const useImagePicker = (onSelect: (e: ImageOrVideo) => void, onPermission
             const response = await openPicker({ includeBase64: true, multiple: false, mediaType: 'photo' });
 
             if (response) {
-                onSelect(response);
+                onSelect(generateImageFileSchema(response));
             }
         } catch (error) {
             console.log('ERROR', error);
         }
     };
 
-    const handleOpenCamera = async () => {
+    const openCamera = async () => {
         try {
 
-            const isPermissionAvailable = await requestCameraPermissions();
+            const permission = await requestCameraPermissions();
 
-            if (!isPermissionAvailable) {
+            if (!permission) {
                 onPermissionFailed && onPermissionFailed('camera');
                 return;
             }
 
-            const response = await openCamera({ mediaType: 'photo', multiple: false, includeBase64: true });
+            const response = await openCameraPicker({ mediaType: 'photo', multiple: false, includeBase64: true });
 
             if (response) {
-                onSelect(response);
+                onSelect(generateImageFileSchema(response));
             }
         } catch (error) {
             console.log('ERROR', error);
         }
     };
 
-    return { handleOpenGallery, handleOpenCamera };
+    return { openGallery, openCamera };
 };
