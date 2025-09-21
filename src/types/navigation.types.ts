@@ -2,6 +2,7 @@ import { EBottomTabScreens, EStackScreens } from '$constants/screen.constants';
 import { BottomTabNavigationProp, BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { createNavigationContainerRef } from '@react-navigation/native';
 import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
+import { QRType, SocialQRType } from './qr.types';
 
 export type BottomTabStackParamsList = {
     [EBottomTabScreens.HOME]: undefined;
@@ -13,7 +14,8 @@ export type RootStackParamsList = {
     [EStackScreens.BOTTOM_TAB_NAVIGATOR]: undefined;
     [EStackScreens.HISTORY]: undefined;
     [EStackScreens.QR_SCANNER]: undefined;
-    [EStackScreens.QR_GENERATOR]: undefined;
+    [EStackScreens.QR_GENERATOR]: { type: QRType };
+    [EStackScreens.SOCIAL_QR_GENERATOR]: { type: SocialQRType };
     [EStackScreens.PRIVACY_POLICY]: undefined;
 }
 

@@ -1,6 +1,7 @@
 const palette = {
     black: '#000000',
     white: '#ffffff',
+    secondaryBlack: '#000000',
     transparent: 'rgba(0,0,0,0)',
     transparent25: 'rgba(0,0,0,0.25)',
     transparent50: 'rgba(0,0,0,0.50)',
