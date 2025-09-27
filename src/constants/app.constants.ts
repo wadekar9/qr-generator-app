@@ -40,3 +40,11 @@ export const WIFI_TYPES = [
     { label: 'WPA', value: 'wpa' },
     { label: 'WPA2', value: 'wpa2' }
 ];
+
+export const NAME_PREFIXES = [
+    { label: 'Mr.', value: 'mr' },
+    { label: 'Mrs.', value: 'mrs' },
+    { label: 'Ms.', value: 'ms' },
+    { label: 'Dr.', value: 'dr' },
+    { label: 'Prof.', value: 'prof' },
+];
