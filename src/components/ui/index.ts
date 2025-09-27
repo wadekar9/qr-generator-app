@@ -3,3 +3,7 @@ export { default as ThemeText } from './theme-text.component';
 export { default as IconButton } from './icon-button.component';
 export { default as BaseSwitch } from './base-switch.component';
 export { default as TextButton } from './text-button.component';
+export { default as BaseButton } from './base-button.component';
+export { default as BaseTextInput } from './base-input.component';
+export { default as BaseTextareaInput } from './base-textarea-input.component';
+export { default as BaseInputAccessoryView } from './base-input-accessory-view.component';

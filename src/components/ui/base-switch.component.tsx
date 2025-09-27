@@ -2,7 +2,9 @@ import React, { useRef, useEffect } from 'react';
 import {
     StyleSheet,
     TouchableOpacity,
-    Animated
+    Animated,
+    View,
+    I18nManager
 } from 'react-native';
 import { moderateScale } from '$constants/styles.constants';
 import { useAppTheme } from '$hooks/common';
@@ -18,9 +20,9 @@ interface BaseSwitchProps {
 const DEFAULT_DIMENSIONS = {
     width: moderateScale(60),
     height: moderateScale(35),
-    radius: moderateScale(100),
-    circleSize: moderateScale(28),
-    circleRadius: moderateScale(100),
+    circleWidth: moderateScale(28),
+    circleHeight: moderateScale(28),
+    translateX: moderateScale(36),
 };
 
 const BaseSwitch: React.FC<BaseSwitchProps> = ({
@@ -31,23 +33,25 @@ const BaseSwitch: React.FC<BaseSwitchProps> = ({
     const { theme } = useAppTheme();
     const styles = createStyles(theme);
 
-    const opacityAnim = useRef(new Animated.Value(value ? 1 : 0)).current;
-    const translateXAnim = useRef(new Animated.Value(value ? DEFAULT_DIMENSIONS.circleSize : 4)).current;
+    const offsetX = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        Animated.parallel([
-            Animated.timing(opacityAnim, {
-                toValue: value ? 1 : 0,
-                duration: 200,
-                useNativeDriver: false,
-            }),
-            Animated.timing(translateXAnim, {
-                toValue: value ? DEFAULT_DIMENSIONS.circleSize : 4,
-                duration: 200,
-                useNativeDriver: false,
-            }),
-        ]).start();
-    }, [value, opacityAnim, translateXAnim]);
+        let toValue: number;
+
+        if (!I18nManager.isRTL && value) {
+            toValue = DEFAULT_DIMENSIONS.width - DEFAULT_DIMENSIONS.translateX;
+        } else if (I18nManager.isRTL && value) {
+            toValue = -DEFAULT_DIMENSIONS.width + DEFAULT_DIMENSIONS.translateX;
+        } else {
+            toValue = -1;
+        }
+
+        Animated.timing(offsetX, {
+            toValue,
+            duration: 300,
+            useNativeDriver: true,
+        }).start();
+    }, [value]);
 
     const handlePress = () => {
         if (!disabled) {
@@ -56,15 +60,16 @@ const BaseSwitch: React.FC<BaseSwitchProps> = ({
     };
 
     return (
-        <TouchableOpacity
-            activeOpacity={0.75}
-            style={[styles.wrapper, disabled && styles.disabledWrapper]}
-            onPress={handlePress}
-            disabled={disabled}
-        >
-            <Animated.View style={[styles.background, { opacity: opacityAnim }]} />
-            <Animated.View style={[styles.circle, { transform: [{ translateX: translateXAnim }] }]} />
-        </TouchableOpacity>
+        <View style={styles.container}>
+            <TouchableOpacity
+                activeOpacity={0.75}
+                style={[styles.wrapper, { backgroundColor: value ? COLORS[theme].primary : COLORS[theme].gray1 }, disabled && styles.disabledWrapper]}
+                onPress={handlePress}
+                disabled={disabled}
+            >
+                <Animated.View style={[styles.circle, { transform: [{ translateX: offsetX }] }]} />
+            </TouchableOpacity>
+        </View>
     );
 };
 
@@ -72,29 +77,35 @@ export default React.memo(BaseSwitch);
 
 const createStyles = (theme: ITheme) => StyleSheet.create({
     wrapper: {
+        justifyContent: 'center',
         width: DEFAULT_DIMENSIONS.width,
+        borderRadius: moderateScale(20),
         height: DEFAULT_DIMENSIONS.height,
-        backgroundColor: COLORS[theme].gray1,
-        borderRadius: DEFAULT_DIMENSIONS.radius,
-        overflow: 'hidden',
-        justifyContent: 'center'
     },
     disabledWrapper: {
         opacity: 0.5,
     },
-    background: {
-        position: 'absolute',
-        backgroundColor: COLORS[theme].primary,
-        width: '100%',
-        height: '100%',
-        zIndex: -1,
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     circle: {
-        height: DEFAULT_DIMENSIONS.circleSize,
-        width: DEFAULT_DIMENSIONS.circleSize,
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 4,
+        left: 0,
+        position: 'absolute',
         backgroundColor: COLORS[theme].white,
-        borderRadius: DEFAULT_DIMENSIONS.circleRadius,
-        marginVertical: 2,
-        zIndex: 1,
+        width: DEFAULT_DIMENSIONS.circleWidth,
+        height: DEFAULT_DIMENSIONS.circleHeight,
+        borderRadius: DEFAULT_DIMENSIONS.circleWidth / 2,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 2.5,
+        elevation: 1.5,
     }
 });
