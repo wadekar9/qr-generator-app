@@ -18,3 +18,11 @@ export interface BaseSheetModalRef {
     open: () => void;
     close: () => void;
 }
+
+export interface BaseQRInputPageRef {
+    onPressSubmit: () => void;
+}
+
+export interface BaseQRInputPageProps {
+    theme: ITheme;
+}
