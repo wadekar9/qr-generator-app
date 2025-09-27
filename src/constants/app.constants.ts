@@ -33,3 +33,10 @@ export const SOCIAL_QR_TYPES: { type: SocialQRType; label: string; icon: any }[]
     { type: 'instagram', label: 'Instagram', icon: Instagram },
     { type: 'xtwitter', label: 'X/Twitter', icon: XTwitter },
 ];
+
+export const WIFI_TYPES = [
+    { label: 'None', value: 'none' },
+    { label: 'WEP', value: 'wep' },
+    { label: 'WPA', value: 'wpa' },
+    { label: 'WPA2', value: 'wpa2' }
+];

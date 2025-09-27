@@ -1,6 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useMemo, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
+import { EFonts, moderateScale } from '$constants/styles.constants';
 import { Dropdown } from 'react-native-element-dropdown';
+import { useAppTheme } from '$hooks/common';
+import { ITheme } from '$types/common.types';
+import { COLORS } from '$constants/colors.constants';
+import { ChevronDown, ChevronUp } from 'lucide-react-native';
 
 interface BaseDropdownProps {
     data?: any[];
@@ -10,35 +15,35 @@ interface BaseDropdownProps {
     placeholder?: string;
     error?: string;
     disabled?: boolean;
-    onValueChange?: (e: any) => void;
+    onValueChange?: (e: string) => void;
     icon?: () => React.ReactNode;
 }
 
 const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
 
     const { data = [], label, value, placeholder = 'Select Item', error, disabled, variant, onValueChange, icon } = props;
+    const { theme, colors } = useAppTheme();
+    const styles = styling(theme);
 
     const [isFocus, setIsFocus] = useState<boolean>(false);
-
-    const DATA = useMemo(() => data.map(item => ({ label: item.name, value: `${item.id}` })), [data]);
 
     return (
         <View style={styles.wrapper}>
             {label && <Text numberOfLines={2} style={styles.label}>{label}</Text>}
-            <View style={[styles.containerWrapper, (variant === 'secondary') && { borderRadius: 100 }]}>
+            <View style={[styles.containerWrapper, (variant == 'secondary') && { borderRadius: moderateScale(100) }]}>
                 <Dropdown
                     style={[styles.container, isFocus && { borderColor: 'blue' }]}
                     placeholderStyle={[styles.value, styles.placeholder]}
                     selectedTextStyle={styles.value}
                     itemTextStyle={styles.itemTextStyle}
-                    containerStyle={{ backgroundColor: '#f9f9f9' }}
-                    data={DATA}
-                    maxHeight={200}
+                    containerStyle={{ backgroundColor: colors.surface }}
+                    data={data}
+                    maxHeight={moderateScale(200)}
                     labelField="label"
                     valueField="value"
                     dropdownPosition='auto'
                     disable={disabled}
-                    activeColor={'transparent'}
+                    activeColor='transparent'
                     placeholder={placeholder}
                     value={value}
                     onFocus={() => setIsFocus(true)}
@@ -52,6 +57,15 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
                             {icon && icon()}
                         </View>
                     )}
+                    renderRightIcon={(visible) => (
+                        <View style={styles.icon}>
+                            {visible ?
+                                <ChevronUp color={colors.gray} width={moderateScale(24)} height={moderateScale(24)} />
+                                :
+                                <ChevronDown color={colors.gray} width={moderateScale(24)} height={moderateScale(24)} />
+                            }
+                        </View>
+                    )}
                 />
             </View>
             {error && (
@@ -60,55 +74,61 @@ const BaseDropdown: React.FC<BaseDropdownProps> = (props) => {
                 </View>
             )}
         </View>
-    );
-};
+    )
+}
 
 export default React.memo(BaseDropdown);
 
-const styles = StyleSheet.create({
+const styling = (theme: ITheme) => StyleSheet.create({
     wrapper: {
         width: '100%',
     },
     label: {
-        color: 'black',
+        color: COLORS[theme].text,
+        fontFamily: EFonts.MEDIUM,
+        fontSize: moderateScale(16),
         textAlign: 'left',
+        marginBottom: moderateScale(4)
     },
     value: {
-        color: 'black',
-        textTransform: 'capitalize',
+        fontFamily: EFonts.MEDIUM,
+        fontSize: moderateScale(16),
+        color: COLORS[theme].text
     },
     placeholder: {
-        color: 'gray',
+        color: COLORS[theme].gray
     },
     containerWrapper: {
-        borderWidth: StyleSheet.hairlineWidth,
-        borderRadius: 8,
+        borderWidth: moderateScale(1),
+        borderRadius: moderateScale(8),
+        borderColor: COLORS[theme].border,
         overflow: 'hidden',
-        elevation: 0,
+        elevation: 0
     },
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        height: 50,
+        height: moderateScale(50)
     },
     icon: {
-        paddingHorizontal: 12,
+        paddingHorizontal: moderateScale(12),
         alignItems: 'center',
         justifyContent: 'center',
         aspectRatio: 1,
-        alignSelf: 'stretch',
+        alignSelf: 'stretch'
     },
     itemTextStyle: {
-        fontSize: 16,
-        color: 'black',
-        textTransform: 'capitalize',
+        fontFamily: EFonts.MEDIUM,
+        fontSize: moderateScale(16),
+        color: COLORS[theme].text,
     },
     errorContainer: {
-        marginTop: 8,
+        marginTop: moderateScale(8),
     },
     errorText: {
-        fontSize: 13,
-        color: 'red',
+        fontFamily: EFonts.MEDIUM,
+        fontSize: moderateScale(13),
+        color: COLORS[theme].red,
         flexWrap: 'wrap',
-    },
+    }
 });

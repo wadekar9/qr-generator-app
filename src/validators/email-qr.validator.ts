@@ -1,9 +1,9 @@
 import { z } from "zod"
 
 const emailQrValidator = z.object({
-    email: z.string().email({ message: 'Please enter a valid email.' }).nonempty({ message: 'Please enter the email.' }),
-    subject: z.string().nonempty({ message: 'Please enter the subject.' }),
-    message: z.string().nonempty({ message: 'Please enter the message.' })
+    email: z.string().trim().email({ message: 'Please enter a valid email.' }).nonempty({ message: 'Please enter the email.' }),
+    subject: z.string().trim().nonempty({ message: 'Please enter the subject.' }),
+    message: z.string().trim().nonempty({ message: 'Please enter the message.' })
 });
 
 type EmailQrValidatorSchema = z.infer<typeof emailQrValidator>
