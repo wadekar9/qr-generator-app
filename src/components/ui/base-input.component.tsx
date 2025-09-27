@@ -129,7 +129,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     },
     label: {
         color: COLORS[theme].text,
-        fontFamily: EFonts.REGULAR,
+        fontFamily: EFonts.MEDIUM,
         textAlign: 'left',
         marginBottom: moderateScale(4)
     },
@@ -147,7 +147,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     textInput: {
         flex: 1,
         height: '100%',
-        fontFamily: EFonts.REGULAR,
+        fontFamily: EFonts.MEDIUM,
         fontSize: EFontSize.XL,
         color: COLORS[theme].text
     },
@@ -155,7 +155,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         marginTop: moderateScale(8),
     },
     errorText: {
-        fontFamily: EFonts.REGULAR,
+        fontFamily: EFonts.MEDIUM,
         fontSize: moderateScale(13),
         color: COLORS[theme].red,
         flexWrap: 'wrap',
