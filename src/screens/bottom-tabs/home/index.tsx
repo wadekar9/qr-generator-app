@@ -37,7 +37,7 @@ const Home: React.FC<BottomTabStackScreenProps<EBottomTabScreens.HOME>> = () => 
                     })}
                 </View>
 
-                <ThemeText theme={theme} style={styles.titleText}>Social QR Code</ThemeText>
+                <ThemeText theme={theme} style={styles.titleText}>Generate Social QR Code</ThemeText>
                 <View style={styles.section}>
                     {SOCIAL_QR_TYPES.map((qrType, idx) => {
                         const Icon = qrType.icon;

@@ -1,9 +1,9 @@
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { ITheme } from '$types/common.types';
 import { Camera } from 'lucide-react-native';
 import { COLORS } from '$constants/colors.constants';
-import { moderateScale } from '$constants/styles.constants';
+import { EFonts, moderateScale } from '$constants/styles.constants';
 
 interface QRScreenWithoutPermissionPageProps {
     theme: ITheme;
@@ -17,7 +17,7 @@ const QRScreenWithoutPermissionPage: React.FC<QRScreenWithoutPermissionPageProps
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
-                <Camera size={64} color={COLORS[props.theme].text4} />
+                <Camera size={moderateScale(64)} color={COLORS[props.theme].text4} />
                 <Text style={[styles.message, { color: COLORS[props.theme].text }]}>
                     Camera permission is required to scan QR codes
                 </Text>
@@ -45,25 +45,26 @@ const styling = (theme: ITheme) => StyleSheet.create({
         backgroundColor: COLORS[theme].surface
     },
     message: {
-        fontSize: 18,
+        fontFamily: EFonts.MEDIUM,
+        fontSize: moderateScale(18),
         textAlign: 'center',
-        marginVertical: 20,
-        lineHeight: 24,
+        marginVertical: moderateScale(20),
+        lineHeight: moderateScale(24),
     },
     subMessage: {
-        fontSize: 14,
+        fontSize: moderateScale(14),
         textAlign: 'center',
         marginTop: 8,
     },
     permissionButton: {
-        paddingHorizontal: 24,
-        paddingVertical: 12,
-        borderRadius: 8,
-        marginTop: 20,
+        paddingHorizontal: moderateScale(24),
+        paddingVertical: moderateScale(12),
+        borderRadius: moderateScale(8),
+        marginTop: moderateScale(20),
     },
     permissionButtonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: '600',
+        color: COLORS[theme].white,
+        fontSize: moderateScale(16),
+        fontFamily: EFonts.SEMI_BOLD
     },
 })

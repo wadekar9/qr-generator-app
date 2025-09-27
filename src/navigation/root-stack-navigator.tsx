@@ -11,9 +11,11 @@ const RootStack = createNativeStackNavigator<RootStackParamsList>();
 const RootStackNavigator = () => {
     return (
         <NavigationContainer ref={stackNavigationRef}>
-            <RootStack.Navigator>
-                <RootStack.Screen name={EStackScreens.SPLASH} component={StacksRoutes.Splash} />
-                <RootStack.Screen name={EStackScreens.BOTTOM_TAB_NAVIGATOR} component={BottomTabNavigator} options={{ headerShown: false }} />
+            <RootStack.Navigator
+                screenOptions={{ orientation: 'portrait', headerShown: false }}
+                initialRouteName={EStackScreens.BOTTOM_TAB_NAVIGATOR}
+            >
+                <RootStack.Screen name={EStackScreens.BOTTOM_TAB_NAVIGATOR} component={BottomTabNavigator} />
                 <RootStack.Screen name={EStackScreens.QR_GENERATOR} component={StacksRoutes.QRGenerator} />
                 <RootStack.Screen name={EStackScreens.QR_SCANNER} component={StacksRoutes.QRScanner} />
                 <RootStack.Screen name={EStackScreens.HISTORY} component={StacksRoutes.History} />

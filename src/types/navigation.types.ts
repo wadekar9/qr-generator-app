@@ -10,7 +10,6 @@ export type BottomTabStackParamsList = {
 }
 
 export type RootStackParamsList = {
-    [EStackScreens.SPLASH]: undefined;
     [EStackScreens.BOTTOM_TAB_NAVIGATOR]: undefined;
     [EStackScreens.HISTORY]: undefined;
     [EStackScreens.QR_SCANNER]: undefined;
