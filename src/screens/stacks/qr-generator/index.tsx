@@ -7,7 +7,7 @@ import { BackHeader } from '$components/navigation';
 import { useAppTheme } from '$hooks/common';
 import { styling } from './styles';
 import { BaseButton } from '$components/ui';
-import { TextQRInputPage } from '$components/pages';
+import { TextQRInputPage, URLQRInputPage } from '$components/pages';
 import { BaseQRInputPageRef } from '$types/common.types';
 
 const QRGenerator: React.FC<RootStackScreenProps<EStackScreens.QR_GENERATOR>> = ({ route: { params } }) => {
@@ -22,7 +22,7 @@ const QRGenerator: React.FC<RootStackScreenProps<EStackScreens.QR_GENERATOR>> = 
             case 'text':
                 return <TextQRInputPage ref={pageRef} theme={theme} />
             case 'url':
-                return <TextQRInputPage ref={pageRef} theme={theme} />
+                return <URLQRInputPage ref={pageRef} theme={theme} />
             case 'email':
                 return <TextQRInputPage ref={pageRef} theme={theme} />
             case 'wifi':

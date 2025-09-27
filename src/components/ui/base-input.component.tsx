@@ -157,7 +157,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     errorText: {
         fontFamily: EFonts.REGULAR,
         fontSize: moderateScale(13),
-        color: COLORS[theme].primary,
+        color: COLORS[theme].red,
         flexWrap: 'wrap',
     },
     icon: {

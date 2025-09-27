@@ -37,6 +37,4 @@ const TextQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ 
     )
 })
 
-export default TextQRInputPage
-
-const styles = StyleSheet.create({})
+export default TextQRInputPage;
