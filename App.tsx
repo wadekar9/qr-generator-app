@@ -4,14 +4,17 @@ import AppThemeProvider from '$context/app-theme.context';
 import FlashMessage from 'react-native-flash-message';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import RootStackNavigator from '$navigation/root-stack-navigator';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 
 const App = () => {
   return (
     <AppThemeProvider>
       <SafeAreaProvider>
-        <GestureHandlerRootView>
-          <RootStackNavigator />
-        </GestureHandlerRootView>
+        <KeyboardProvider>
+          <GestureHandlerRootView>
+            <RootStackNavigator />
+          </GestureHandlerRootView>
+        </KeyboardProvider>
       </SafeAreaProvider>
 
       <FlashMessage position="top" />
