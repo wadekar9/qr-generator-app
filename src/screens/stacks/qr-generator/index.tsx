@@ -7,7 +7,18 @@ import { BackHeader } from '$components/navigation';
 import { useAppTheme } from '$hooks/common';
 import { styling } from './styles';
 import { BaseButton } from '$components/ui';
-import { ContactQRInputPage, EmailQRInputPage, EventQRInputPage, LocationQRInputPage, PhoneQRInputPage, SMSQRInputPage, TextQRInputPage, URLQRInputPage, WifiQRInputPage } from '$components/pages';
+import {
+    ContactQRInputPage,
+    EmailQRInputPage,
+    EventQRInputPage,
+    LocationQRInputPage,
+    PhoneQRInputPage,
+    SMSQRInputPage,
+    TextQRInputPage,
+    URLQRInputPage,
+    WhatsappQRInputPage,
+    WifiQRInputPage
+} from '$components/pages';
 import { BaseQRInputPageRef } from '$types/common.types';
 
 const QRGenerator: React.FC<RootStackScreenProps<EStackScreens.QR_GENERATOR>> = ({ route: { params } }) => {
@@ -37,6 +48,8 @@ const QRGenerator: React.FC<RootStackScreenProps<EStackScreens.QR_GENERATOR>> = 
                 return <LocationQRInputPage ref={pageRef} theme={theme} />
             case 'event':
                 return <EventQRInputPage ref={pageRef} theme={theme} />
+            case 'whatsapp':
+                return <WhatsappQRInputPage ref={pageRef} theme={theme} />
             default:
                 return <TextQRInputPage ref={pageRef} theme={theme} />
         }

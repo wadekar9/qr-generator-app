@@ -7,7 +7,8 @@ export type QRType =
     | 'sms'
     | 'contact'
     | 'location'
-    | 'event';
+    | 'event'
+    | 'whatsapp';
 
 export type SocialQRType =
     | 'whatsapp'

@@ -22,6 +22,7 @@ export const QR_TYPES: { type: QRType; label: string; icon: any }[] = [
     { type: 'contact', label: 'Contact', icon: User },
     { type: 'location', label: 'Location', icon: MapPin },
     { type: 'event', label: 'Event', icon: Calendar },
+    { type: 'whatsapp', label: 'WhatsApp', icon: WhatsApp },
 ];
 
 export const SOCIAL_QR_TYPES: { type: SocialQRType; label: string; icon: any }[] = [

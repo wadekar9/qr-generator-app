@@ -36,23 +36,6 @@ const Home: React.FC<BottomTabStackScreenProps<EBottomTabScreens.HOME>> = () => 
                         );
                     })}
                 </View>
-
-                <ThemeText theme={theme} style={styles.titleText}>Generate Social QR Code</ThemeText>
-                <View style={styles.section}>
-                    {SOCIAL_QR_TYPES.map((qrType, idx) => {
-                        const Icon = qrType.icon;
-                        return (
-                            <IconButton
-                                key={`${idx}`}
-                                style={styles.qrContainer}
-                                onPress={() => stackNavigationRef.current?.navigate(EStackScreens.SOCIAL_QR_GENERATOR, { type: qrType.type })}
-                            >
-                                <Icon fill={colors.primary} width={moderateScale(30)} height={moderateScale(30)} />
-                                <ThemeText theme={theme} style={styles.qrLabel}>{qrType.label}</ThemeText>
-                            </IconButton>
-                        );
-                    })}
-                </View>
             </ScrollView>
         </ThemedSafeAreaView>
     );

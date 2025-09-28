@@ -128,7 +128,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         width: '100%',
     },
     label: {
-        color: COLORS[theme].text,
+        color: COLORS[theme].text1,
         fontFamily: EFonts.MEDIUM,
         textAlign: 'left',
         marginBottom: moderateScale(4)
