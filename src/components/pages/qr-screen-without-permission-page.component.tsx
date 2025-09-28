@@ -4,6 +4,8 @@ import { ITheme } from '$types/common.types';
 import { Camera } from 'lucide-react-native';
 import { COLORS } from '$constants/colors.constants';
 import { EFonts, moderateScale } from '$constants/styles.constants';
+import { TextButton } from '$components/ui';
+import { stackNavigationRef } from '$types/navigation.types';
 
 interface QRScreenWithoutPermissionPageProps {
     theme: ITheme;
@@ -27,6 +29,7 @@ const QRScreenWithoutPermissionPage: React.FC<QRScreenWithoutPermissionPageProps
                 >
                     <Text style={styles.permissionButtonText}>Grant Permission</Text>
                 </TouchableOpacity>
+                <TextButton label='Go Back' labelStyle={styles.subMessage} onPress={() => stackNavigationRef.current?.goBack()} />
             </View>
         </SafeAreaView>
     )
@@ -52,9 +55,11 @@ const styling = (theme: ITheme) => StyleSheet.create({
         lineHeight: moderateScale(24),
     },
     subMessage: {
-        fontSize: moderateScale(14),
         textAlign: 'center',
-        marginTop: 8,
+        marginTop: moderateScale(8),
+        color: COLORS[theme].text,
+        fontSize: moderateScale(16),
+        fontFamily: EFonts.MEDIUM
     },
     permissionButton: {
         paddingHorizontal: moderateScale(24),
