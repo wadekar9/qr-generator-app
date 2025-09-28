@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useImperativeHandle } from 'react'
 import { BaseQRInputPageProps, BaseQRInputPageRef } from '$types/common.types'
 import { BaseTextInput, ThemeText } from '$components/ui'
 import { Controller, useForm } from 'react-hook-form'
-import { webQrValidator, WebQrValidatorSchema } from 'src/validators/web-qr.validator'
+import { webQrValidator, WebQrValidatorSchema } from '$validators/web-qr.validator'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const URLQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {

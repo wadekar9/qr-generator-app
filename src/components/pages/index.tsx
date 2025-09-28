@@ -6,3 +6,5 @@ export { default as WifiQRInputPage } from './wifi-qr-input-page.component';
 export { default as PhoneQRInputPage } from './phone-qr-input-page.component';
 export { default as SMSQRInputPage } from './sms-qr-input-page.component';
 export { default as ContactQRInputPage } from './contact-qr-input-page.component';
+export { default as LocationQRInputPage } from './location-qr-input-page.component';
+export { default as EventQRInputPage } from './event-qr-input-page.component';

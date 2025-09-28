@@ -7,3 +7,4 @@ export { default as BaseButton } from './base-button.component';
 export { default as BaseTextInput } from './base-input.component';
 export { default as BaseTextareaInput } from './base-textarea-input.component';
 export { default as BaseInputAccessoryView } from './base-input-accessory-view.component';
+export { default as BaseDatePicker } from './base-date-picker.component';

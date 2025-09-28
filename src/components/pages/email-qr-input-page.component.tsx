@@ -2,7 +2,7 @@ import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'rea
 import { BaseQRInputPageProps, BaseQRInputPageRef } from '$types/common.types'
 import { BaseInputAccessoryView, BaseTextareaInput, BaseTextInput, ThemeText } from '$components/ui'
 import { Controller, useForm } from 'react-hook-form'
-import { emailQrValidator, EmailQrValidatorSchema } from 'src/validators/email-qr.validator'
+import { emailQrValidator, EmailQrValidatorSchema } from '$validators/email-qr.validator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TextInput } from 'react-native'
 
