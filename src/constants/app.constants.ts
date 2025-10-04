@@ -1,5 +1,5 @@
-import { Discord, Instagram, LinkedIn, Telegram, WhatsApp, XTwitter, YouTube } from '$assets/icons';
-import { QRType, SocialQRType } from '$types/qr.types';
+import { WhatsApp } from '$assets/icons';
+import { QRType } from '$types/qr.types';
 import {
     Globe,
     Mail,
@@ -9,7 +9,12 @@ import {
     User,
     MapPin,
     Calendar,
-    Hash
+    Hash,
+    Palette,
+    Shapes,
+    Focus,
+    Frame,
+    Settings
 } from 'lucide-react-native';
 
 export const QR_TYPES: { type: QRType; label: string; icon: any }[] = [
@@ -25,16 +30,6 @@ export const QR_TYPES: { type: QRType; label: string; icon: any }[] = [
     { type: 'whatsapp', label: 'WhatsApp', icon: WhatsApp },
 ];
 
-export const SOCIAL_QR_TYPES: { type: SocialQRType; label: string; icon: any }[] = [
-    { type: 'whatsapp', label: 'WhatsApp', icon: WhatsApp },
-    { type: 'telegram', label: 'Telegram', icon: Telegram },
-    { type: 'linkedin', label: 'LinkedIn', icon: LinkedIn },
-    { type: 'discord', label: 'Discord', icon: Discord },
-    { type: 'youtube', label: 'YouTube', icon: YouTube },
-    { type: 'instagram', label: 'Instagram', icon: Instagram },
-    { type: 'xtwitter', label: 'X/Twitter', icon: XTwitter },
-];
-
 export const WIFI_TYPES = [
     { label: 'None', value: 'none' },
     { label: 'WEP', value: 'wep' },
@@ -48,4 +43,12 @@ export const NAME_PREFIXES = [
     { label: 'Ms.', value: 'ms' },
     { label: 'Dr.', value: 'dr' },
     { label: 'Prof.', value: 'prof' },
+];
+
+export const QR_STYLING_OPTIONS = [
+    { label: 'Color', icon: Palette },
+    { label: 'Shape', icon: Shapes },
+    { label: 'Logo', icon: Focus },
+    { label: 'Frame', icon: Frame },
+    { label: 'Settings', icon: Settings },
 ];
