@@ -6,7 +6,7 @@ import { ThemedSafeAreaView } from '$components/containers';
 import { styling } from './styles';
 import { useAppTheme } from '$hooks/common';
 import { IconButton, ThemeText } from '$components/ui';
-import { QR_TYPES, SOCIAL_QR_TYPES } from '$constants/app.constants';
+import { QR_TYPES } from '$constants/app.constants';
 import { moderateScale } from '$constants/styles.constants';
 
 const Home: React.FC<BottomTabStackScreenProps<EBottomTabScreens.HOME>> = () => {

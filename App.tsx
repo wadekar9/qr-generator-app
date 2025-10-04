@@ -11,7 +11,7 @@ const App = () => {
     <AppThemeProvider>
       <SafeAreaProvider>
         <KeyboardProvider>
-          <GestureHandlerRootView>
+          <GestureHandlerRootView style={{ flex: 1 }}>
             <RootStackNavigator />
           </GestureHandlerRootView>
         </KeyboardProvider>

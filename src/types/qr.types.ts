@@ -10,15 +10,6 @@ export type QRType =
     | 'event'
     | 'whatsapp';
 
-export type SocialQRType =
-    | 'whatsapp'
-    | 'telegram'
-    | 'linkedin'
-    | 'discord'
-    | 'youtube'
-    | 'instagram'
-    | 'xtwitter';
-
 export interface QRData {
     // Text
     text?: string;
