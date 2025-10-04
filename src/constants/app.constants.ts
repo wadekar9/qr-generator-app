@@ -52,3 +52,7 @@ export const QR_STYLING_OPTIONS = [
     { label: 'Frame', icon: Frame },
     { label: 'Settings', icon: Settings },
 ];
+
+// QR Color Options
+export const PRIMARY_COLORS = ['#000000', '#EF4444', '#3B82F6', '#2BC55E', '#EAB407', '#9333EA', '#F97316', '#EC499A', '#6366F1'];
+export const BACKGROUND_COLORS = ['#FFFFFF', '#E5E7EB', '#FEE2E3', '#DBEBFE', '#DDFCE7', '#FEF9C4', '#F3E9FF', '#C2C2C2', '#B1B5B9'];
