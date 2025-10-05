@@ -14,9 +14,10 @@ import Animated, {
     Extrapolation,
     withTiming,
 } from 'react-native-reanimated';
-import { DEVICE_HEIGHT, DEVICE_WIDTH, moderateScale } from '$constants/styles.constants'
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '$constants/styles.constants'
 import { QR_STYLING_OPTIONS } from '$constants/app.constants'
 import { IconButton } from '$components/ui'
+import { QRColorOptionsPage } from '$components/pages'
 
 // Constants for height constraints
 const UPPER_MIN_HEIGHT = DEVICE_HEIGHT * 0.25;  // 30% minimum
@@ -84,24 +85,6 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
         };
     });
 
-    // Generate sample content for scrolling
-    const generateContent = () => {
-        const items = [];
-        for (let i = 1; i <= 50; i++) {
-            items.push(
-                <View key={i} style={styles.contentItem}>
-                    <Text style={styles.contentTitle}>
-                        Scrollable Item {i}
-                    </Text>
-                    <Text style={styles.contentDescription}>
-                        This is content item number {i}. Scroll down to see real-time animation.
-                    </Text>
-                </View>
-            );
-        }
-        return items;
-    };
-
     const onChooseTab = useCallback((idx: number) => {
         setActiveTab(idx);
         tabIndicatorX.value = withTiming(idx * Math.round(DEVICE_WIDTH / 5));
@@ -151,16 +134,18 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                             </Animated.View>
                         </View>
 
-                        <Animated.ScrollView
-                            style={styles.scrollView}
-                            contentContainerStyle={styles.scrollContent}
-                            onScroll={scrollHandler}
-                            scrollEventThrottle={1} // Maximum responsiveness
-                            bounces={true}
-                            showsVerticalScrollIndicator={true}
-                        >
-                            {generateContent()}
-                        </Animated.ScrollView>
+                        <View style={styles.container}>
+                            <Animated.ScrollView
+                                style={styles.scrollView}
+                                contentContainerStyle={styles.scrollContent}
+                                onScroll={scrollHandler}
+                                scrollEventThrottle={1} // Maximum responsiveness
+                                bounces={true}
+                                showsVerticalScrollIndicator={true}
+                            >
+                                <QRColorOptionsPage theme={theme} />
+                            </Animated.ScrollView>
+                        </View>
                     </View>
                 </Animated.View>
 

@@ -1,5 +1,6 @@
 export type ITheme = 'dark' | 'light';
 export type IBaseTheme = 'default' | 'dark' | 'light';
+export type IGradientDirection = 'down' | 'right' | 'down-right' | 'up-right' | 'center';
 
 export interface AppThemeContextProps {
     currentTheme: ITheme;

@@ -5,7 +5,8 @@ import { COLORS } from '$constants/colors.constants';
 
 export const styling = (theme: ITheme) => StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        flexGrow: 1
     },
     upperBlock: {
         backgroundColor: '#4A90E2',
@@ -105,7 +106,9 @@ export const styling = (theme: ITheme) => StyleSheet.create({
         flex: 1,
     },
     scrollContent: {
-        paddingBottom: 20,
+        flexGrow: 1,
+        padding: moderateScale(20),
+        gap: moderateScale(25),
     },
     contentItem: {
         padding: 20,
