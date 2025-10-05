@@ -10,3 +10,4 @@ export { default as LocationQRInputPage } from './location-qr-input-page.compone
 export { default as EventQRInputPage } from './event-qr-input-page.component';
 export { default as WhatsappQRInputPage } from './whatsapp-qr-input-page.component';
 export { default as QRColorOptionsPage } from './qr-color-options-page.component';
+export { default as QRShareOptionsPage } from './qr-share-options-page.component';
