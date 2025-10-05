@@ -118,7 +118,7 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Padding Type</ThemeText>
-                <BaseTabSelection theme={theme} tabs={['empty', 'accurate', 'natural']} selectedTab={paddingType} onTabSelect={(tab) => setPaddingType?.(tab)} />
+                <BaseTabSelection theme={theme} tabs={['Empty', 'Accurate', 'Natural']} selectedTab={paddingType} onTabSelect={(tab) => setPaddingType?.(tab)} />
                 <ThemeText theme={theme} style={styles.label}>
                     {`Type of the logo padding:\nEmpty - no padding;\nAccurate - padding is accurate to QR code size.\nNatural - Padding with logo shape, but without sliced pixels.`}
                 </ThemeText>

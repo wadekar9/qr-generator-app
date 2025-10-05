@@ -17,7 +17,8 @@ import Animated, {
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '$constants/styles.constants'
 import { QR_STYLING_OPTIONS } from '$constants/app.constants'
 import { IconButton } from '$components/ui'
-import { QRBackgroundOptionsPage, QRColorOptionsPage, QRLogoOptionsPage, QRShareOptionsPage } from '$components/pages'
+import { QRBackgroundOptionsPage, QRColorOptionsPage, QRLogoOptionsPage, QRSettingsOptionsPage, QRShareOptionsPage } from '$components/pages'
+import { IQRBackgroundStyles, IQRLogoStyles, IQRSettingsStyles, IQRShapeStyles, IQRStyles } from '$types/qr-styles.types'
 
 // Constants for height constraints
 const UPPER_MIN_HEIGHT = DEVICE_HEIGHT * 0.25;  // 30% minimum
@@ -36,6 +37,44 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
     const tabIndicatorX = useSharedValue(0);
 
     const [activeTab, setActiveTab] = React.useState<number>(0);
+
+    const [QRColorStyles, setQRColorStyles] = React.useState<IQRStyles>({
+        primaryColor: ['#000'],
+        backgroundColor: ['#fff'],
+        primaryColorType: 'solid',
+        backgroundColorType: 'solid',
+    });
+
+    const [QRShapeStyles, setQRShapeStyles] = React.useState<IQRShapeStyles>({
+        codeShape: 'square',
+        darkPixelShape: 'circle',
+        lightPixelShape: 'circle',
+        eyeFrameShape: 'circle',
+        eyeBallShape: 'circle',
+    });
+
+    const [QRLogoStyles, setQRLogoStyles] = React.useState<IQRLogoStyles>({
+        logo: null,
+        logoShape: 'circle',
+        crop: false,
+        size: 100,
+        paddingType: 'circle',
+        padding: 10,
+    });
+
+    const [QRBackgroundStyles, setQRBackgroundStyles] = React.useState<IQRBackgroundStyles>({
+        background: null,
+        padding: 10,
+        xoffset: 0,
+        yoffset: 0,
+    });
+
+    const [QRSettingsStyles, setQRSettingsStyles] = React.useState<IQRSettingsStyles>({
+        errorDetectionLevel: 'L',
+        format: 'PNG',
+        size: '1024',
+        enable4thEye: false,
+    });
 
     // Real-time scroll handler - no springs, direct value mapping
     const scrollHandler = useAnimatedScrollHandler({
@@ -143,10 +182,76 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                                 bounces={true}
                                 showsVerticalScrollIndicator={true}
                             >
-                                {/* <QRColorOptionsPage theme={theme} /> */}
-                                {/* <QRShareOptionsPage theme={theme} /> */}
-                                {/* <QRLogoOptionsPage theme={theme} /> */}
-                                <QRBackgroundOptionsPage theme={theme} />
+                                {activeTab === 0 && (
+                                    <QRColorOptionsPage
+                                        theme={theme}
+                                        onChooseColor={(color, type, background) => {
+                                            if (type === 'primary') {
+                                                setQRColorStyles((prev) => ({ ...prev, primaryColor: color, primaryColorType: background }));
+                                            } else {
+                                                setQRColorStyles((prev) => ({ ...prev, backgroundColor: color, backgroundColorType: background }));
+                                            }
+                                        }}
+                                    />
+                                )}
+                                {activeTab === 1 && (
+                                    <QRShareOptionsPage
+                                        theme={theme}
+                                        codeShape={QRShapeStyles.codeShape}
+                                        darkPixelShape={QRShapeStyles.darkPixelShape}
+                                        lightPixelShape={QRShapeStyles.lightPixelShape}
+                                        eyeFrameShape={QRShapeStyles.eyeFrameShape}
+                                        eyeBallShape={QRShapeStyles.eyeBallShape}
+                                        setCodeShape={(e) => setQRShapeStyles((prev) => ({ ...prev, codeShape: e }))}
+                                        setDarkPixelShape={(e) => setQRShapeStyles((prev) => ({ ...prev, darkPixelShape: e }))}
+                                        setLightPixelShape={(e) => setQRShapeStyles((prev) => ({ ...prev, lightPixelShape: e }))}
+                                        setEyeFrameShape={(e) => setQRShapeStyles((prev) => ({ ...prev, eyeFrameShape: e }))}
+                                        setEyeBallShape={(e) => setQRShapeStyles((prev) => ({ ...prev, eyeBallShape: e }))}
+                                    />
+                                )}
+                                {activeTab === 2 && (
+                                    <QRLogoOptionsPage
+                                        theme={theme}
+                                        logo={QRLogoStyles.logo || ''}
+                                        logoShape={QRLogoStyles.logoShape}
+                                        crop={QRLogoStyles.crop}
+                                        size={QRLogoStyles.size}
+                                        paddingType={QRLogoStyles.paddingType}
+                                        padding={QRLogoStyles.padding}
+                                        setLogo={(logo) => setQRLogoStyles((prev) => ({ ...prev, logo: logo || '' }))}
+                                        setLogoShape={(logoShape) => setQRLogoStyles((prev) => ({ ...prev, logoShape }))}
+                                        setCrop={(crop) => setQRLogoStyles((prev) => ({ ...prev, crop }))}
+                                        setSize={(size) => setQRLogoStyles((prev) => ({ ...prev, size }))}
+                                        setPaddingType={(paddingType) => setQRLogoStyles((prev) => ({ ...prev, paddingType }))}
+                                        setPadding={(padding) => setQRLogoStyles((prev) => ({ ...prev, padding }))}
+                                    />
+                                )}
+                                {activeTab === 3 && (
+                                    <QRBackgroundOptionsPage
+                                        theme={theme}
+                                        background={QRBackgroundStyles.background || ''}
+                                        padding={QRBackgroundStyles.padding}
+                                        xoffset={QRBackgroundStyles.xoffset}
+                                        yoffset={QRBackgroundStyles.yoffset}
+                                        setBackground={(background) => setQRBackgroundStyles((prev) => ({ ...prev, background }))}
+                                        setXoffset={(xoffset) => setQRBackgroundStyles((prev) => ({ ...prev, xoffset }))}
+                                        setYoffset={(yoffset) => setQRBackgroundStyles((prev) => ({ ...prev, yoffset }))}
+                                        setPadding={(padding) => setQRBackgroundStyles((prev) => ({ ...prev, padding }))}
+                                    />
+                                )}
+                                {activeTab === 4 && (
+                                    <QRSettingsOptionsPage
+                                        theme={theme}
+                                        errorDetectionLevel={QRSettingsStyles.errorDetectionLevel}
+                                        format={QRSettingsStyles.format}
+                                        size={QRSettingsStyles.size}
+                                        enable4thEye={QRSettingsStyles.enable4thEye}
+                                        setErrorDetectionLevel={(errorDetectionLevel) => setQRSettingsStyles((prev) => ({ ...prev, errorDetectionLevel }))}
+                                        setFormat={(format) => setQRSettingsStyles((prev) => ({ ...prev, format }))}
+                                        setSize={(size) => setQRSettingsStyles((prev) => ({ ...prev, size }))}
+                                        setEnable4thEye={(enable4thEye) => setQRSettingsStyles((prev) => ({ ...prev, enable4thEye }))}
+                                    />
+                                )}
                             </Animated.ScrollView>
                         </View>
                     </View>

@@ -13,7 +13,6 @@ interface QRShareOptionsPageProps {
     lightPixelShape?: DarkPixelShape;
     eyeFrameShape?: EyeShape;
     eyeBallShape?: EyeShape;
-    onChooseColor?: (color: Array<string>, type: 'primary' | 'background', background: 'solid' | 'gradient') => void;
     setCodeShape?: (e: 'square' | 'circle') => void;
     setDarkPixelShape?: (e: DarkPixelShape) => void;
     setLightPixelShape?: (e: DarkPixelShape) => void;

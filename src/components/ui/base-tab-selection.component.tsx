@@ -58,8 +58,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         fontFamily: EFonts.SEMI_BOLD,
         fontSize: EFontSize.BASE,
         color: COLORS[theme].text,
-        textAlign: 'center',
-        textTransform: 'capitalize'
+        textAlign: 'center'
     },
     activeTabText: {
         color: COLORS[theme].white
