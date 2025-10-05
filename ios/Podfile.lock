@@ -1370,6 +1370,49 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-slider (5.0.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - react-native-slider/common (= 5.0.1)
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - react-native-slider/common (5.0.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - React-NativeModulesApple (0.78.3):
     - glog
     - hermes-engine
@@ -2102,6 +2145,7 @@ DEPENDENCIES:
   - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-slider (from `../node_modules/@react-native-community/slider`)"
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
   - React-performancetimeline (from `../node_modules/react-native/ReactCommon/react/performance/timeline`)
@@ -2234,6 +2278,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-community/netinfo"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-slider:
+    :path: "../node_modules/@react-native-community/slider"
   React-NativeModulesApple:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios"
   React-perflogger:
@@ -2359,6 +2405,7 @@ SPEC CHECKSUMS:
   react-native-keyboard-controller: aa67d2de4f5e08f890ee491351f333ca73533b81
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
   react-native-safe-area-context: ad7b31de8373577e003e700340b746fd5645b12c
+  react-native-slider: c200205d150ef94babb7e005329a01ed951573d1
   React-NativeModulesApple: 7c9c0c4e76731529b2e15f5d5edb266b980556ea
   React-perflogger: 069d41f741187be92ed46c6ac67add03b99f3166
   React-performancetimeline: 6deb6607876acc3d5647bd994e139639702fb28e

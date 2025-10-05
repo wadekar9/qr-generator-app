@@ -17,7 +17,7 @@ import Animated, {
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '$constants/styles.constants'
 import { QR_STYLING_OPTIONS } from '$constants/app.constants'
 import { IconButton } from '$components/ui'
-import { QRColorOptionsPage, QRShareOptionsPage } from '$components/pages'
+import { QRColorOptionsPage, QRLogoOptionsPage, QRShareOptionsPage } from '$components/pages'
 
 // Constants for height constraints
 const UPPER_MIN_HEIGHT = DEVICE_HEIGHT * 0.25;  // 30% minimum
@@ -144,7 +144,8 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                                 showsVerticalScrollIndicator={true}
                             >
                                 {/* <QRColorOptionsPage theme={theme} /> */}
-                                <QRShareOptionsPage theme={theme} />
+                                {/* <QRShareOptionsPage theme={theme} /> */}
+                                <QRLogoOptionsPage theme={theme} />
                             </Animated.ScrollView>
                         </View>
                     </View>

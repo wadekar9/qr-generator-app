@@ -11,3 +11,4 @@ export { default as EventQRInputPage } from './event-qr-input-page.component';
 export { default as WhatsappQRInputPage } from './whatsapp-qr-input-page.component';
 export { default as QRColorOptionsPage } from './qr-color-options-page.component';
 export { default as QRShareOptionsPage } from './qr-share-options-page.component';
+export { default as QRLogoOptionsPage } from './qr-logo-options-page.component';
