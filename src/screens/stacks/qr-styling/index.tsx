@@ -16,9 +16,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import { DEVICE_HEIGHT, DEVICE_WIDTH } from '$constants/styles.constants'
 import { QR_STYLING_OPTIONS } from '$constants/app.constants'
-import { IconButton } from '$components/ui'
+import { IconButton, TextButton } from '$components/ui'
 import { QRBackgroundOptionsPage, QRColorOptionsPage, QRLogoOptionsPage, QRSettingsOptionsPage, QRShareOptionsPage } from '$components/pages'
 import { IQRBackgroundStyles, IQRLogoStyles, IQRSettingsStyles, IQRShapeStyles, IQRStyles } from '$types/qr-styles.types'
+import { QRCodeLayout } from '$components/layouts'
+import { getErrorDetectionLevel } from '$utils/helpers'
 
 // Constants for height constraints
 const UPPER_MIN_HEIGHT = DEVICE_HEIGHT * 0.25;  // 30% minimum
@@ -43,22 +45,23 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
         backgroundColor: ['#fff'],
         primaryColorType: 'solid',
         backgroundColorType: 'solid',
+        gradientOrientation: 'Vertical',
     });
 
     const [QRShapeStyles, setQRShapeStyles] = React.useState<IQRShapeStyles>({
         codeShape: 'square',
-        darkPixelShape: 'circle',
-        lightPixelShape: 'circle',
-        eyeFrameShape: 'circle',
-        eyeBallShape: 'circle',
+        darkPixelShape: 'Default',
+        lightPixelShape: 'Default',
+        eyeFrameShape: 'Default',
+        eyeBallShape: 'Default',
     });
 
     const [QRLogoStyles, setQRLogoStyles] = React.useState<IQRLogoStyles>({
         logo: null,
-        logoShape: 'circle',
+        logoShape: 'Circle',
         crop: false,
-        size: 100,
-        paddingType: 'circle',
+        size: 50,
+        paddingType: 'empty',
         padding: 10,
     });
 
@@ -70,7 +73,7 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
     });
 
     const [QRSettingsStyles, setQRSettingsStyles] = React.useState<IQRSettingsStyles>({
-        errorDetectionLevel: 'L',
+        errorDetectionLevel: 'Auto',
         format: 'PNG',
         size: '1024',
         enable4thEye: false,
@@ -143,23 +146,51 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
 
     return (
         <ThemedView>
-            <BackHeader theme={theme} label='QR Design' />
-            <View style={styles.container}>
+            <BackHeader
+                theme={theme}
+                label='QR Design'
+                RightAccessory={
+                    <TextButton
+                        label='Save'
+                        labelStyle={styles.shareButtonText}
+                        onPress={() => console.log('Save')}
+                    />
+                }
+            />
+            <View style={styles.wrapper}>
 
                 {/* Upper Block */}
                 <Animated.View style={[styles.upperBlock, upperBlockStyle]}>
-                    <View style={styles.upperContent}>
-                        <Text style={styles.upperTitle}>Upper Block</Text>
-                        <Text style={styles.upperSubtitle}>
-                            Real-time collapse on scroll down
-                        </Text>
-                        <Text style={styles.rangeText}>
-                            Range: {Math.round(UPPER_MIN_HEIGHT)}px - {Math.round(UPPER_MAX_HEIGHT)}px
-                        </Text>
-                        <Text style={styles.scrollIndicator}>
-                            Scroll Distance: 0-{MAX_SCROLL_DISTANCE}px
-                        </Text>
-                    </View>
+                    <QRCodeLayout
+                        scrollY={scrollY}
+                        qrCodeType='Text'
+                        qrCodeData={{ value: 'BizCard' }}
+                        qrCodeStyleOptions={{
+                            padding: QRBackgroundStyles.padding,
+                            errorCorrectionLevel: getErrorDetectionLevel(QRSettingsStyles.errorDetectionLevel || 'Auto'),
+                            logo: {
+                                base64: QRLogoStyles.logo || '',
+                                size: QRLogoStyles.size,
+                                padding: QRLogoStyles.padding,
+                                shape: QRLogoStyles.logoShape,
+                            },
+                            background: {
+                                base64: QRBackgroundStyles.background || '',
+                                color: QRColorStyles.backgroundColor[0]
+                            },
+                            qrColors: {
+                                type: QRColorStyles.primaryColorType === 'solid' ? 'Solid' : 'LinearGradient',
+                                color: QRColorStyles.primaryColor[0],
+                                colors: QRColorStyles.primaryColor.map((color, index) => ({ position: index / (QRColorStyles.primaryColor.length - 1), color })),
+                                orientation: QRColorStyles.gradientOrientation
+                            },
+                            shapes: {
+                                darkPixel: QRShapeStyles.darkPixelShape,
+                                ball: QRShapeStyles.eyeBallShape,
+                                frame: QRShapeStyles.eyeFrameShape,
+                            },
+                        }}
+                    />
                 </Animated.View>
 
                 {/* Lower Block with ScrollView */}
@@ -185,6 +216,8 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                                 {activeTab === 0 && (
                                     <QRColorOptionsPage
                                         theme={theme}
+                                        orientation={QRColorStyles.gradientOrientation}
+                                        onChangeOrientation={(orientation) => setQRColorStyles((prev) => ({ ...prev, gradientOrientation: orientation }))}
                                         onChooseColor={(color, type, background) => {
                                             if (type === 'primary') {
                                                 setQRColorStyles((prev) => ({ ...prev, primaryColor: color, primaryColorType: background }));
