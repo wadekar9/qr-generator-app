@@ -1,23 +1,25 @@
 import { DarkPixelShape, EyeShape } from "./common.types";
+import { LogoShapeType, PixelShapeType, QRGradientOrientation } from "./qr.types";
 
 export interface IQRStyles {
     primaryColor: Array<string>;
     backgroundColor: Array<string>;
     primaryColorType: 'solid' | 'gradient';
     backgroundColorType: 'solid' | 'gradient';
+    gradientOrientation: QRGradientOrientation;
 }
 
 export interface IQRShapeStyles {
     codeShape: 'square' | 'circle';
-    darkPixelShape: DarkPixelShape;
-    lightPixelShape: DarkPixelShape;
-    eyeFrameShape: EyeShape;
-    eyeBallShape: EyeShape;
+    darkPixelShape: PixelShapeType;
+    lightPixelShape: PixelShapeType;
+    eyeFrameShape: PixelShapeType;
+    eyeBallShape: PixelShapeType;
 }
 
 export interface IQRLogoStyles {
     logo: string | null;
-    logoShape: DarkPixelShape;
+    logoShape: LogoShapeType;
     crop: boolean;
     size: number;
     paddingType: string;

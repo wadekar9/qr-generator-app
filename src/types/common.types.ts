@@ -1,6 +1,5 @@
 export type ITheme = 'dark' | 'light';
 export type IBaseTheme = 'default' | 'dark' | 'light';
-export type IGradientDirection = 'down' | 'right' | 'down-right' | 'up-right' | 'center';
 export type DarkPixelShape = 'square' | 'dashed-square' | 'circle' | 'circle-small' | 'diamond' | 'columns' | 'rows';
 export type EyeShape = 'square' | 'dashed-square' | 'circle' | 'circle-outline' | 'circle-small' | 'diamond';
 

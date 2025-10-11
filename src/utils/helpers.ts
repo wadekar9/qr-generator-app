@@ -1,4 +1,5 @@
 import { IMediaFile } from '$types/common.types';
+import { ErrorDetectionLevelType } from '$types/qr.types';
 import { Image } from 'react-native-image-crop-picker';
 
 export const generateImageFileSchema = (file: Image): IMediaFile => {
@@ -28,4 +29,21 @@ export function isValidWhatsAppNumber(input: string | number): boolean {
     const validWhatsAppRegex = /^\+?[1-9]\d{9,14}$/;
 
     return validWhatsAppRegex.test(number);
+}
+
+export function getErrorDetectionLevel(level: string): ErrorDetectionLevelType {
+    switch (level) {
+        case 'Auto':
+            return 'Quartile';
+        case 'L':
+            return 'Low';
+        case 'M':
+            return 'Medium';
+        case 'Q':
+            return 'Quartile';
+        case 'H':
+            return 'High';
+        default:
+            return 'Quartile';
+    }
 }
