@@ -17,6 +17,7 @@ module.exports = {
           '$hooks': './src/hooks',
           '$locales': './src/locales',
           '$mock': './src/mock',
+          '$native': './src/native',
           '$navigation': './src/navigation',
           '$screens': './src/screens',
           '$styles': './src/styles',

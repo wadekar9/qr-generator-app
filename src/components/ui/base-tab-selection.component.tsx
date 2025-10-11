@@ -23,9 +23,9 @@ const BaseTabSelection = ({ theme, tabs, selectedTab, onTabSelect }: BaseTabSele
                 <IconButton
                     key={`${idx}`}
                     onPress={() => onTabSelect(tab)}
-                    style={[styles.tab, selectedTab === tab && styles.selectedTab]}
+                    style={[styles.tab, selectedTab.toLowerCase() === tab.toLowerCase() && styles.selectedTab]}
                 >
-                    <ThemeText theme={theme} style={[styles.tabText, selectedTab === tab && styles.activeTabText]}>{tab}</ThemeText>
+                    <ThemeText theme={theme} style={[styles.tabText, selectedTab.toLowerCase() === tab.toLowerCase() && styles.activeTabText]}>{tab}</ThemeText>
                 </IconButton>
             ))}
         </View>
@@ -46,7 +46,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         borderRadius: moderateScale(10)
     },
     tab: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%'

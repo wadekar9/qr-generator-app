@@ -10,7 +10,7 @@ export const generateImageFileSchema = (file: Image): IMediaFile => {
         name: filename || file.filename || 'unknown',
         type: file.mime || 'image/jpeg',
         uri: file.path,
-        base64: file.data || ''
+        base64: `data:${file.mime};base64,${file.data}` || ''
     };
 };
 

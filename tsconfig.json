@@ -41,6 +41,9 @@
       "$mock/*": [
         "src/mock/*"
       ],
+      "$native/*": [
+        "src/native/*"
+      ],
       "$navigation/*": [
         "src/navigation/*"
       ],

@@ -48,7 +48,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        height: moderateScale(45),
+        height: moderateScale(60),
         paddingRight: moderateScale(20),
         borderBottomWidth: moderateScale(1),
         borderBottomColor: COLORS[theme].border1,

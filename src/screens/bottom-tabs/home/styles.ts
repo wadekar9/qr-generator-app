@@ -25,8 +25,8 @@ export const styling = (theme: ITheme, insets: EdgeInsets) => StyleSheet.create(
         gap: moderateScale(10)
     },
     qrContainer: {
-        width: Math.floor((DEVICE_WIDTH - 60) / 3),
-        height: Math.floor((DEVICE_WIDTH - 60) / 3),
+        width: Math.floor((DEVICE_WIDTH - 62) / 3),
+        height: Math.floor((DEVICE_WIDTH - 62) / 3),
         backgroundColor: COLORS[theme].surface,
         borderRadius: moderateScale(10),
         alignItems: 'center',
