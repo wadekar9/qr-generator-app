@@ -34,7 +34,7 @@ const QRSettingsOptionsPage: React.FC<QRSettingsOptionsPageProps> = ({
 
     return (
         <>
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
                 <ThemeText theme={theme}>4-th eye</ThemeText>
                 <View style={[styles.options, { height: moderateScale(40) }]}>
                     <BaseLabelCheckbox value={enable4thEye} onValueChange={setEnable4thEye} label='Enable' />
@@ -60,7 +60,7 @@ const QRSettingsOptionsPage: React.FC<QRSettingsOptionsPageProps> = ({
                 <ThemeText theme={theme} style={styles.label}>
                     {`Format of output QR Code image.`}
                 </ThemeText>
-            </View>
+            </View> */}
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Error Detection Level</ThemeText>
@@ -75,7 +75,7 @@ const QRSettingsOptionsPage: React.FC<QRSettingsOptionsPageProps> = ({
     )
 }
 
-export default QRSettingsOptionsPage
+export default React.memo(QRSettingsOptionsPage);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     section: {

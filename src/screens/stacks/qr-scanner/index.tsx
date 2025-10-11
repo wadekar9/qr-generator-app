@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ActivityIndicator, Alert, SafeAreaView, StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import {
     Camera,
@@ -31,17 +31,16 @@ const QRScanner: React.FC<RootStackScreenProps<EStackScreens.QR_SCANNER>> = ({ n
 
     const [isCameraInitialized, setIsCameraInitialized] = useState(false);
     const [isActive, setIsActive] = useState(true);
-    const [flash, setFlash] = useState<'on' | 'off'>(true ? 'off' : 'on');
+    const [flash, setFlash] = useState<'on' | 'off'>('off');
     const [QRCodeResponse, setQRCodeResponse] = useState<string | undefined>(undefined);
     const [showLoader, setShowLoader] = useState<boolean>(false);
 
     const isFocused = useIsFocused();
 
-
     const { appState } = useAppStateListener();
     const { theme, colors } = useAppTheme();
 
-    const $styles = styling(theme!);
+    const $styles = useMemo(() => styling(theme!), [theme]);
     const { hasPermission, requestPermission } = useCameraPermission();
     const device = useCameraDevice('back');
     const camera = useRef<Camera>(null);
@@ -107,24 +106,21 @@ const QRScanner: React.FC<RootStackScreenProps<EStackScreens.QR_SCANNER>> = ({ n
         codeTypes: ['qr'],
         onCodeScanned: codes => {
             if (codes.length && !QRCodeResponse) {
+                console.log("codes", codes); //READ ECONOMICS TIMES PAPER
                 setQRCodeResponse(codes[0].value!)
             }
             return;
         },
     });
 
-    const animatedLineStyle = useAnimatedStyle(() => {
-        return {
-            opacity: lineOpacity.value,
-        };
-    });
+    const animatedLineStyle = useAnimatedStyle(() => ({ opacity: lineOpacity.value }));
 
     if (device == null || !hasPermission) {
         return <QRScreenWithoutPermissionPage theme={theme} requestPermission={requestPermission} />
     }
 
     return (
-        <SafeAreaView style={$styles.safeArea}>
+        <>
             <View style={$styles.safeArea}>
                 <ReanimatedCamera
                     torch={flash}
@@ -148,12 +144,13 @@ const QRScanner: React.FC<RootStackScreenProps<EStackScreens.QR_SCANNER>> = ({ n
 
                 />
 
-                <Reanimated.View style={[$styles.line, animatedLineStyle]} />
-
-                <RNHoleView
-                    holes={[{ x: DEVICE_WIDTH * 0.1, y: DEVICE_HEIGHT * 0.2, width: DEVICE_WIDTH * 0.8, height: DEVICE_HEIGHT * 0.4, borderRadius: 10 }]}
-                    style={[$styles.rnholeView, $styles.fullScreenCamera]}
-                />
+                <View style={$styles.safeArea}>
+                    <RNHoleView
+                        holes={[{ x: Math.round(DEVICE_WIDTH * 0.1), y: Math.round(DEVICE_HEIGHT * 0.2), width: Math.round(DEVICE_WIDTH * 0.8), height: Math.round(DEVICE_HEIGHT * 0.4), borderRadius: 10 }]}
+                        style={[$styles.rnholeView, $styles.fullScreenCamera]}
+                    />
+                    <Reanimated.View style={[$styles.line, animatedLineStyle]} />
+                </View>
 
                 {
                     showLoader && (
@@ -226,7 +223,7 @@ const QRScanner: React.FC<RootStackScreenProps<EStackScreens.QR_SCANNER>> = ({ n
                 ref={permissionSheetRef}
                 theme={theme}
             />
-        </SafeAreaView>
+        </>
     )
 }
 

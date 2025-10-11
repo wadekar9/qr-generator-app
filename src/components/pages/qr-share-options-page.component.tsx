@@ -1,23 +1,23 @@
 import { StyleSheet, View } from 'react-native'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
-import { IconButton, ThemeText } from '$components/ui'
-import { DarkPixelShape, EyeShape, ITheme } from '$types/common.types'
+import { BaseTabSelection, ThemeText } from '$components/ui'
+import { ITheme } from '$types/common.types'
 import { COLORS } from '$constants/colors.constants'
-import { Circle, CircleSmall, Columns3, Diamond, Rows3, Square, SquareDashedTopSolid } from 'lucide-react-native'
+import { PixelShapeType } from '$types/qr.types'
 
 interface QRShareOptionsPageProps {
     theme: ITheme;
     codeShape?: 'square' | 'circle';
-    darkPixelShape?: DarkPixelShape;
-    lightPixelShape?: DarkPixelShape;
-    eyeFrameShape?: EyeShape;
-    eyeBallShape?: EyeShape;
+    darkPixelShape: PixelShapeType;
+    lightPixelShape?: PixelShapeType;
+    eyeFrameShape: PixelShapeType;
+    eyeBallShape: PixelShapeType;
     setCodeShape?: (e: 'square' | 'circle') => void;
-    setDarkPixelShape?: (e: DarkPixelShape) => void;
-    setLightPixelShape?: (e: DarkPixelShape) => void;
-    setEyeFrameShape?: (e: EyeShape) => void;
-    setEyeBallShape?: (e: EyeShape) => void;
+    setDarkPixelShape?: (e: PixelShapeType) => void;
+    setLightPixelShape?: (e: PixelShapeType) => void;
+    setEyeFrameShape?: (e: PixelShapeType) => void;
+    setEyeBallShape?: (e: PixelShapeType) => void;
 }
 
 const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
@@ -34,11 +34,11 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
     setEyeBallShape,
 }) => {
 
-    const styles = styling(theme);
+    const styles = useMemo(() => styling(theme), [theme]);
 
     return (
         <>
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
                 <ThemeText theme={theme}>Code</ThemeText>
                 <View style={styles.options}>
                     <IconButton style={[styles.option, codeShape === 'square' && styles.optionActive]} onPress={() => setCodeShape?.('square')}>
@@ -49,11 +49,12 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
                     </IconButton>
                 </View>
                 <ThemeText theme={theme} style={styles.label}>Shape of the QR code pattern</ThemeText>
-            </View>
+            </View> */}
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Dark Pixels</ThemeText>
-                <View style={styles.options}>
+                <BaseTabSelection theme={theme} tabs={['Default', 'RoundCorners', 'Circle']} selectedTab={darkPixelShape} onTabSelect={(tab) => setDarkPixelShape?.(tab as PixelShapeType)} />
+                {/* <View style={styles.options}>
                     <IconButton style={[styles.option, darkPixelShape === 'square' && styles.optionActive]} onPress={() => setDarkPixelShape?.('square')}>
                         <Square width={moderateScale(22)} height={moderateScale(22)} fill={darkPixelShape === 'square' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />
                     </IconButton>
@@ -75,11 +76,11 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
                     <IconButton style={[styles.option, darkPixelShape === 'rows' && styles.optionActive]} onPress={() => setDarkPixelShape?.('rows')}>
                         <Rows3 width={moderateScale(22)} height={moderateScale(22)} color={darkPixelShape === 'rows' ? COLORS[theme].white : COLORS[theme].text} />
                     </IconButton>
-                </View>
+                </View> */}
                 <ThemeText theme={theme} style={styles.label}>Shape of the dark QR code dots.</ThemeText>
             </View>
 
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
                 <ThemeText theme={theme}>Light Pixels</ThemeText>
                 <View style={styles.options}>
                     <IconButton style={[styles.option, lightPixelShape === 'square' && styles.optionActive]} onPress={() => setLightPixelShape?.('square')}>
@@ -105,11 +106,12 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
                     </IconButton>
                 </View>
                 <ThemeText theme={theme} style={styles.label}>Shape of the dark QR code dots.</ThemeText>
-            </View>
+            </View> */}
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Eye Frame</ThemeText>
-                <View style={styles.options}>
+                <BaseTabSelection theme={theme} tabs={['Default', 'RoundCorners', 'Circle']} selectedTab={eyeFrameShape} onTabSelect={(tab) => setEyeFrameShape?.(tab as PixelShapeType)} />
+                {/* <View style={styles.options}>
                     <IconButton style={[styles.option, eyeFrameShape === 'square' && styles.optionActive]} onPress={() => setEyeFrameShape?.('square')}>
                         <Square width={moderateScale(22)} height={moderateScale(22)} color={eyeFrameShape === 'square' ? COLORS[theme].white : COLORS[theme].text} />
                     </IconButton>
@@ -128,13 +130,14 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
                     <IconButton style={[styles.option, eyeFrameShape === 'diamond' && styles.optionActive]} onPress={() => setEyeFrameShape?.('diamond')}>
                         <Diamond width={moderateScale(22)} height={moderateScale(22)} fill={eyeFrameShape === 'diamond' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />
                     </IconButton>
-                </View>
+                </View> */}
                 <ThemeText theme={theme} style={styles.label}>Shape of the QR code pattern</ThemeText>
             </View>
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Eye Ball</ThemeText>
-                <View style={styles.options}>
+                <BaseTabSelection theme={theme} tabs={['Default', 'RoundCorners', 'Circle']} selectedTab={eyeBallShape} onTabSelect={(tab) => setEyeBallShape?.(tab as PixelShapeType)} />
+                {/* <View style={styles.options}>
                     <IconButton style={[styles.option, eyeBallShape === 'square' && styles.optionActive]} onPress={() => setEyeBallShape?.('square')}>
                         <Square width={moderateScale(22)} height={moderateScale(22)} fill={eyeBallShape === 'square' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />
                     </IconButton>
@@ -153,7 +156,7 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
                     <IconButton style={[styles.option, eyeBallShape === 'diamond' && styles.optionActive]} onPress={() => setEyeBallShape?.('diamond')}>
                         <Diamond width={moderateScale(22)} height={moderateScale(22)} fill={eyeBallShape === 'diamond' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />
                     </IconButton>
-                </View>
+                </View> */}
                 <ThemeText theme={theme} style={styles.label}>Shape of the QR code pattern</ThemeText>
             </View>
             <View style={styles.space} />
@@ -161,7 +164,7 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
     )
 }
 
-export default QRShareOptionsPage
+export default React.memo(QRShareOptionsPage);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     section: {

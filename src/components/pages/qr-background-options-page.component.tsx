@@ -35,7 +35,7 @@ const QRBackgroundOptionsPage: React.FC<QRBackgroundOptionsPageProps> = ({
 }) => {
 
     const styles = styling(theme);
-    const { openGallery } = useImagePicker((e) => setBackground(e.uri));
+    const { openGallery } = useImagePicker((img) => setBackground(img.base64 || ''));
 
     return (
         <>
@@ -70,20 +70,18 @@ const QRBackgroundOptionsPage: React.FC<QRBackgroundOptionsPageProps> = ({
                 <Slider
                     style={{ width: '100%', height: moderateScale(40) }}
                     minimumValue={0}
-                    maximumValue={1}
+                    maximumValue={100}
                     minimumTrackTintColor={COLORS[theme].primary}
                     maximumTrackTintColor={COLORS[theme].border}
                     value={padding}
-                    onValueChange={setPadding}
+                    onSlidingComplete={setPadding}
                     thumbTintColor={COLORS[theme].primary}
                 />
 
-                <ThemeText theme={theme} style={styles.label}>
-                    Padding of the QR Code.
-                </ThemeText>
+                <ThemeText theme={theme} style={styles.label}>Padding of the QR Code.</ThemeText>
             </View>
 
-            <View style={styles.section}>
+            {/* <View style={styles.section}>
                 <ThemeText theme={theme}>Offset</ThemeText>
 
                 <View style={styles.sliders}>
@@ -91,11 +89,11 @@ const QRBackgroundOptionsPage: React.FC<QRBackgroundOptionsPageProps> = ({
                         <Slider
                             style={{ width: '100%', height: moderateScale(40) }}
                             minimumValue={0}
-                            maximumValue={1}
+                            maximumValue={100}
                             minimumTrackTintColor={COLORS[theme].primary}
                             maximumTrackTintColor={COLORS[theme].border}
                             value={xoffset}
-                            onValueChange={setXoffset}
+                            onSlidingComplete={setXoffset}
                             thumbTintColor={COLORS[theme].primary}
                         />
                     </View>
@@ -104,11 +102,11 @@ const QRBackgroundOptionsPage: React.FC<QRBackgroundOptionsPageProps> = ({
                         <Slider
                             style={{ width: '100%', height: moderateScale(40) }}
                             minimumValue={0}
-                            maximumValue={1}
+                            maximumValue={100}
                             minimumTrackTintColor={COLORS[theme].primary}
                             maximumTrackTintColor={COLORS[theme].border}
                             value={yoffset}
-                            onValueChange={setYoffset}
+                            onSlidingComplete={setYoffset}
                             thumbTintColor={COLORS[theme].primary}
                         />
                     </View>
@@ -117,14 +115,14 @@ const QRBackgroundOptionsPage: React.FC<QRBackgroundOptionsPageProps> = ({
                 <ThemeText theme={theme} style={styles.label}>
                     Horizontal and vertical offset of the QR code pattern.
                 </ThemeText>
-            </View>
+            </View> */}
 
             <View style={styles.space} />
         </>
     )
 }
 
-export default QRBackgroundOptionsPage
+export default React.memo(QRBackgroundOptionsPage);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     section: {

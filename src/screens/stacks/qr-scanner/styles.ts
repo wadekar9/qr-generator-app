@@ -5,7 +5,8 @@ import { StyleSheet } from "react-native";
 
 export const styling = (theme: ITheme) => StyleSheet.create({
     safeArea: {
-        flex: 1
+        flex: 1,
+        flexGrow: 1
     },
     fullScreenCamera: {
         position: 'absolute',
@@ -77,6 +78,7 @@ export const styling = (theme: ITheme) => StyleSheet.create({
         width: DEVICE_WIDTH * 0.8,
         height: 3,
         backgroundColor: 'red',
+        zIndex: 2500
     },
     sheetContainer: {
         flex: 1,

@@ -1,24 +1,25 @@
 import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
-import { BaseLabelCheckbox, BaseTabSelection, IconButton, ThemeText } from '$components/ui'
-import { DarkPixelShape, ITheme } from '$types/common.types'
+import { IconButton, ThemeText } from '$components/ui'
+import { ITheme } from '$types/common.types'
 import { COLORS } from '$constants/colors.constants'
 import { Circle, Square, SquareDashedTopSolid, Trash, Upload } from 'lucide-react-native'
 import Slider from '@react-native-community/slider';
 import { useImagePicker } from '$hooks/common'
+import { LogoShapeType } from '$types/qr.types'
 
 interface QRLogoOptionsPageProps {
     theme: ITheme;
     logo?: string;
-    logoShape?: DarkPixelShape;
+    logoShape?: LogoShapeType;
     crop?: boolean;
     size?: number;
     paddingType?: string;
     padding?: number;
 
     setLogo: (logo: string | null) => void;
-    setLogoShape: (logoShape: DarkPixelShape) => void;
+    setLogoShape: (logoShape: LogoShapeType) => void;
     setCrop: (crop: boolean) => void;
     setSize: (size: number) => void;
     setPaddingType: (paddingType: string) => void;
@@ -28,7 +29,7 @@ interface QRLogoOptionsPageProps {
 const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
     theme,
     logo = null,
-    logoShape = 'square',
+    logoShape = 'Square',
     crop = false,
     size = 0,
     paddingType = 'empty',
@@ -42,7 +43,7 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
 }) => {
 
     const styles = styling(theme);
-    const { openGallery } = useImagePicker((e) => setLogo(e.uri));
+    const { openGallery } = useImagePicker((img) => setLogo(img.base64 || ''));
 
     return (
         <>
@@ -75,19 +76,19 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
             <View style={styles.section}>
                 <ThemeText theme={theme}>Shape</ThemeText>
                 <View style={styles.options}>
-                    <IconButton style={[styles.option, logoShape === 'square' && styles.optionActive]} onPress={() => setLogoShape('square')}>
-                        <Square width={moderateScale(22)} height={moderateScale(22)} fill={logoShape === 'square' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />
+                    <IconButton style={[styles.option, logoShape === 'Square' && styles.optionActive]} onPress={() => setLogoShape('Square')}>
+                        <Square width={moderateScale(22)} height={moderateScale(22)} fill={logoShape === 'Square' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />
                     </IconButton>
-                    <IconButton style={[styles.option, logoShape === 'dashed-square' && styles.optionActive]} onPress={() => setLogoShape('dashed-square')}>
-                        <SquareDashedTopSolid width={moderateScale(22)} height={moderateScale(22)} color={logoShape === 'dashed-square' ? COLORS[theme].white : COLORS[theme].text} />
+                    <IconButton style={[styles.option, logoShape === 'Default' && styles.optionActive]} onPress={() => setLogoShape('Default')}>
+                        <SquareDashedTopSolid width={moderateScale(22)} height={moderateScale(22)} color={logoShape === 'Default' ? COLORS[theme].white : COLORS[theme].text} />
                     </IconButton>
-                    <IconButton style={[styles.option, logoShape === 'circle' && styles.optionActive]} onPress={() => setLogoShape('circle')}>
-                        <Circle width={moderateScale(22)} height={moderateScale(22)} fill={logoShape === 'circle' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />
+                    <IconButton style={[styles.option, logoShape === 'Circle' && styles.optionActive]} onPress={() => setLogoShape('Circle')}>
+                        <Circle width={moderateScale(22)} height={moderateScale(22)} fill={logoShape === 'Circle' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />
                     </IconButton>
                 </View>
                 <ThemeText theme={theme} style={styles.label}>Shape of the QR code logo</ThemeText>
             </View>
-
+            {/* 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Crop</ThemeText>
                 <View style={[styles.options, { height: moderateScale(40) }]}>
@@ -96,18 +97,18 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
                 <ThemeText theme={theme} style={styles.label}>
                     If image is not square, it will be cropped to square keeping image's aspect ratio.
                 </ThemeText>
-            </View>
+            </View> */}
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Size</ThemeText>
                 <Slider
                     style={{ width: '100%', height: moderateScale(40) }}
-                    minimumValue={0}
-                    maximumValue={1}
+                    minimumValue={10}
+                    maximumValue={100}
                     minimumTrackTintColor={COLORS[theme].primary}
                     maximumTrackTintColor={COLORS[theme].border}
                     value={size}
-                    onValueChange={setSize}
+                    onSlidingComplete={setSize}
                     thumbTintColor={COLORS[theme].primary}
                 />
 
@@ -115,25 +116,25 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
                     Size of the QR code logo. If it it too big, QR code might be unreadble!
                 </ThemeText>
             </View>
-
+            {/* 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Padding Type</ThemeText>
                 <BaseTabSelection theme={theme} tabs={['Empty', 'Accurate', 'Natural']} selectedTab={paddingType} onTabSelect={(tab) => setPaddingType?.(tab)} />
                 <ThemeText theme={theme} style={styles.label}>
                     {`Type of the logo padding:\nEmpty - no padding;\nAccurate - padding is accurate to QR code size.\nNatural - Padding with logo shape, but without sliced pixels.`}
                 </ThemeText>
-            </View>
+            </View> */}
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Padding</ThemeText>
                 <Slider
                     style={{ width: '100%', height: moderateScale(40) }}
                     minimumValue={0}
-                    maximumValue={1}
+                    maximumValue={50}
                     minimumTrackTintColor={COLORS[theme].primary}
                     maximumTrackTintColor={COLORS[theme].border}
                     value={padding}
-                    onValueChange={setPadding}
+                    onSlidingComplete={setPadding}
                     thumbTintColor={COLORS[theme].primary}
                 />
 
@@ -147,7 +148,7 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
     )
 }
 
-export default QRLogoOptionsPage
+export default React.memo(QRLogoOptionsPage);
 
 const styling = (theme: ITheme) => StyleSheet.create({
     section: {
