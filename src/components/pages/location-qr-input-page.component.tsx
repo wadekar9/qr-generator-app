@@ -5,6 +5,9 @@ import { Controller, useForm } from 'react-hook-form'
 import { locationQrValidator, LocationQrValidatorSchema } from '$validators/location-qr.validator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TextInput } from 'react-native'
+import { stackNavigationRef } from '$types/navigation.types'
+import { CommonActions } from '@react-navigation/native'
+import { EStackScreens } from '$constants/screen.constants'
 
 const LocationQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {
 
@@ -19,7 +22,14 @@ const LocationQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>
     });
 
     const onSubmit = useCallback((values: LocationQrValidatorSchema) => {
-        console.log('onPressSubmit', values)
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
+            type: 'location',
+            data: JSON.stringify({
+                lat: +values.latitude,
+                lon: +values.longitude,
+                query: values.query
+            })
+        }));
     }, [])
 
     useImperativeHandle(ref, () => ({
@@ -28,7 +38,7 @@ const LocationQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>
 
     return (
         <>
-            <ThemeText theme={theme}>Link an email address to open the email app ready to go.</ThemeText>
+            <ThemeText theme={theme}>Add your location (lat, lon) and an optional note to make a QR that opens it in Maps.</ThemeText>
             <Controller
                 control={control}
                 name='latitude'
@@ -78,7 +88,7 @@ const LocationQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>
                         onBlur={onBlur}
                         label='Query'
                         placeholder='Enter query'
-                        keyboardType={'decimal-pad'}
+                        keyboardType={'default'}
                         error={errors.query?.message}
                         inputAccessoryViewID='location-query'
                     />

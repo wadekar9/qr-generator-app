@@ -5,6 +5,9 @@ import { Controller, useForm } from 'react-hook-form'
 import { emailQrValidator, EmailQrValidatorSchema } from '$validators/email-qr.validator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TextInput } from 'react-native'
+import { stackNavigationRef } from '$types/navigation.types'
+import { CommonActions } from '@react-navigation/native'
+import { EStackScreens } from '$constants/screen.constants'
 
 const EmailQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {
 
@@ -19,7 +22,14 @@ const EmailQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({
     });
 
     const onSubmit = useCallback((values: EmailQrValidatorSchema) => {
-        console.log('onPressSubmit', values)
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
+            type: 'email',
+            data: JSON.stringify({
+                email: values.email,
+                subject: values.subject,
+                body: values.message
+            })
+        }));
     }, [])
 
     useImperativeHandle(ref, () => ({

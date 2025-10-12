@@ -1,11 +1,14 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react'
 import { BaseQRInputPageProps, BaseQRInputPageRef } from '$types/common.types'
-import { BaseDropdown, BaseTextInput, ThemeText } from '$components/ui'
+import { BaseCheckbox, BaseDropdown, BaseLabelCheckbox, BaseTextInput, ThemeText } from '$components/ui'
 import { Controller, useForm } from 'react-hook-form'
 import { wifiQrValidator, WifiQrValidatorSchema } from '$validators/wifi-qr.validator'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TextInput } from 'react-native'
 import { WIFI_TYPES } from '$constants/app.constants'
+import { stackNavigationRef } from '$types/navigation.types'
+import { CommonActions } from '@react-navigation/native'
+import { EStackScreens } from '$constants/screen.constants'
 
 const WifiQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {
 
@@ -14,13 +17,22 @@ const WifiQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ 
         defaultValues: {
             network: '',
             password: '',
-            encryption: 'none'
+            hidden: false,
+            encryption: 'NONE'
         },
         resolver: zodResolver(wifiQrValidator)
     });
 
     const onSubmit = useCallback((values: WifiQrValidatorSchema) => {
-        console.log('onPressSubmit', values)
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
+            type: 'wifi',
+            data: JSON.stringify({
+                ssid: values.network,
+                psk: values.password,
+                hidden: values.hidden,
+                authentication: values.encryption
+            })
+        }));
     }, [])
 
     useImperativeHandle(ref, () => ({
@@ -79,6 +91,18 @@ const WifiQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ 
                         label='Encryption'
                         placeholder='Select encryption type'
                         error={errors.encryption?.message}
+                    />
+                )}
+            />
+
+            <Controller
+                control={control}
+                name='hidden'
+                render={({ field: { value, onChange } }) => (
+                    <BaseLabelCheckbox
+                        value={value}
+                        onValueChange={onChange}
+                        label='Hidden'
                     />
                 )}
             />

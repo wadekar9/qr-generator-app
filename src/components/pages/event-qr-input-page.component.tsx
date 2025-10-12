@@ -5,6 +5,9 @@ import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { TextInput } from 'react-native'
 import { EventQrValidatorSchema, eventQrValidator } from '$validators/event-qr.validator'
+import { stackNavigationRef } from '$types/navigation.types'
+import { CommonActions } from '@react-navigation/native'
+import { EStackScreens } from '$constants/screen.constants'
 
 const EventQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {
 
@@ -20,7 +23,15 @@ const EventQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({
     });
 
     const onSubmit = useCallback((values: EventQrValidatorSchema) => {
-        console.log('onPressSubmit', values)
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
+            type: 'event',
+            data: JSON.stringify({
+                organizer: values.organizor,
+                start: values.startDateTime,
+                end: values.endDateTime,
+                summary: values.title,
+            })
+        }));
     }, [])
 
     useImperativeHandle(ref, () => ({
@@ -37,8 +48,8 @@ const EventQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
-                        label='Event Title'
-                        placeholder='Enter event title'
+                        label='Event Name'
+                        placeholder='Enter event name'
                         returnKeyType='next'
                         returnKeyLabel='Next'
                         autoCapitalize='none'

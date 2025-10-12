@@ -5,6 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { BaseInputAccessoryView, BaseTextareaInput, BaseTextInput, ThemeText } from '$components/ui'
 import { smsQrValidator, SMSQrValidatorSchema } from '$validators/sms-qr.validator'
 import { TextInput } from 'react-native'
+import { stackNavigationRef } from '$types/navigation.types'
+import { CommonActions } from '@react-navigation/native'
+import { EStackScreens } from '$constants/screen.constants'
 
 const SMSQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {
 
@@ -18,7 +21,14 @@ const SMSQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ t
     });
 
     const onSubmit = useCallback((values: SMSQrValidatorSchema) => {
-        console.log('onPressSubmit', values)
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
+            type: 'sms',
+            data: JSON.stringify({
+                phoneNumber: values.phone,
+                subject: values.message,
+                isMMS: false
+            })
+        }));
     }, [])
 
     useImperativeHandle(ref, () => ({

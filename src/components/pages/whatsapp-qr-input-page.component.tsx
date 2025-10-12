@@ -5,6 +5,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { BaseTextareaInput, BaseTextInput, ThemeText } from '$components/ui'
 import { whatsappQrValidator, WhatsappQrValidatorSchema } from '$validators/whatsapp-qr.validator'
 import { TextInput } from 'react-native'
+import { stackNavigationRef } from '$types/navigation.types'
+import { CommonActions } from '@react-navigation/native'
+import { EStackScreens } from '$constants/screen.constants'
 
 const WhatsappQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {
 
@@ -18,7 +21,12 @@ const WhatsappQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>
     });
 
     const onSubmit = useCallback((values: WhatsappQrValidatorSchema) => {
-        console.log('onPressSubmit', values)
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
+            type: 'whatsapp',
+            data: JSON.stringify({
+                value: `https://wa.me/${values.mobile}?text=${values.message}`
+            })
+        }));
     }, [])
 
     useImperativeHandle(ref, () => ({

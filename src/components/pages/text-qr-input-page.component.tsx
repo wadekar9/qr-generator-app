@@ -16,7 +16,7 @@ const TextQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ 
     useImperativeHandle(ref, () => ({
         onPressSubmit: () => {
             if (!text.trim()) return;
-            stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, { type: 'text', data: { text } }))
+            stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, { type: 'text', data: JSON.stringify({ value: text }) }))
         }
     }), [text])
 

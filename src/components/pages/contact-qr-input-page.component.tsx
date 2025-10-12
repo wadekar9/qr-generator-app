@@ -7,11 +7,14 @@ import { contactQrValidator, ContactQrValidatorSchema } from '$validators/contac
 import { TextInput } from 'react-native'
 import countryList from 'react-select-country-list'
 import { NAME_PREFIXES } from '$constants/app.constants'
+import { stackNavigationRef } from '$types/navigation.types'
+import { CommonActions } from '@react-navigation/native'
+import { EStackScreens } from '$constants/screen.constants'
 
 const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {
 
     const countries = useMemo(() => countryList().getData(), [])
-    const inputRefs = useRef(Array.from({ length: 13 }).map(() => createRef<TextInput>())).current;
+    const inputRefs = useRef(Array.from({ length: 10 }).map(() => createRef<TextInput>())).current;
     const { control, handleSubmit, formState: { errors } } = useForm<ContactQrValidatorSchema>({
         defaultValues: {
             firstName: '',
@@ -19,21 +22,32 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
             prefix: '',
             organization: '',
             phone: '',
-            mobile: '',
             email: '',
             website: '',
-            fax: '',
             street: '',
             city: '',
             region: '',
             postcode: '',
             country: '',
+            note: '',
         },
         resolver: zodResolver(contactQrValidator)
     });
 
     const onSubmit = useCallback((values: ContactQrValidatorSchema) => {
-        console.log('onPressSubmit', values)
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
+            type: 'contact',
+            data: JSON.stringify({
+                name: values.firstName + ' ' + values.lastName,
+                company: values.organization,
+                title: values.prefix,
+                phoneNumber: values.phone,
+                email: values.email,
+                address: values.street + ', ' + values.city + ', ' + values.region + ', ' + values.postcode + ', ' + values.country,
+                website: values.website,
+                note: values.note,
+            })
+        }));
     }, [])
 
     useImperativeHandle(ref, () => ({
@@ -78,6 +92,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyType='done'
                         returnKeyLabel='Done'
                         error={errors.lastName?.message}
+                        onSubmitEditing={() => inputRefs[1].current?.focus()}
                     />
                 )}
             />
@@ -102,7 +117,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                 name='organization'
                 render={({ field: { value, onChange, onBlur } }) => (
                     <BaseTextInput
-                        ref={inputRefs[2]}
+                        ref={inputRefs[1]}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -112,7 +127,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyType='next'
                         returnKeyLabel='Next'
                         error={errors.organization?.message}
-                        onSubmitEditing={() => inputRefs[3].current?.focus()}
+                        onSubmitEditing={() => inputRefs[2].current?.focus()}
                     />
                 )}
             />
@@ -122,7 +137,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                 name='email'
                 render={({ field: { value, onChange, onBlur } }) => (
                     <BaseTextInput
-                        ref={inputRefs[3]}
+                        ref={inputRefs[2]}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -132,7 +147,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyType='next'
                         returnKeyLabel='Next'
                         error={errors.email?.message}
-                        onSubmitEditing={() => inputRefs[4].current?.focus()}
+                        onSubmitEditing={() => inputRefs[3].current?.focus()}
                     />
                 )}
             />
@@ -142,7 +157,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                 name='phone'
                 render={({ field: { value, onChange, onBlur } }) => (
                     <BaseTextInput
-                        ref={inputRefs[4]}
+                        ref={inputRefs[3]}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -152,48 +167,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyType='next'
                         returnKeyLabel='Next'
                         error={errors.phone?.message}
-                        onSubmitEditing={() => inputRefs[5].current?.focus()}
-                    />
-                )}
-            />
-
-            <Controller
-                control={control}
-                name='mobile'
-                render={({ field: { value, onChange, onBlur } }) => (
-                    <BaseTextInput
-                        ref={inputRefs[5]}
-                        value={value}
-                        onChangeText={onChange}
-                        onBlur={onBlur}
-                        label='Mobile Phone'
-                        placeholder='Enter mobile phone number'
-                        keyboardType={'number-pad'}
-                        returnKeyType='next'
-                        returnKeyLabel='Next'
-                        error={errors.mobile?.message}
-                        onSubmitEditing={() => inputRefs[6].current?.focus()}
-                    />
-                )}
-            />
-
-            <Controller
-                control={control}
-                name='fax'
-                render={({ field: { value, onChange, onBlur } }) => (
-                    <BaseTextInput
-                        ref={inputRefs[6]}
-                        value={value}
-                        onChangeText={onChange}
-                        onBlur={onBlur}
-                        label='Fax'
-                        placeholder='Enter a fax'
-                        keyboardType={'number-pad'}
-                        returnKeyType='next'
-                        returnKeyLabel='Next'
-                        autoCapitalize={'characters'}
-                        error={errors.fax?.message}
-                        onSubmitEditing={() => inputRefs[7].current?.focus()}
+                        onSubmitEditing={() => inputRefs[4].current?.focus()}
                     />
                 )}
             />
@@ -203,7 +177,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                 name='street'
                 render={({ field: { value, onChange, onBlur } }) => (
                     <BaseTextInput
-                        ref={inputRefs[7]}
+                        ref={inputRefs[4]}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -213,7 +187,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyType='next'
                         returnKeyLabel='Next'
                         error={errors.street?.message}
-                        onSubmitEditing={() => inputRefs[8].current?.focus()}
+                        onSubmitEditing={() => inputRefs[5].current?.focus()}
                     />
                 )}
             />
@@ -223,7 +197,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                 name='city'
                 render={({ field: { value, onChange, onBlur } }) => (
                     <BaseTextInput
-                        ref={inputRefs[8]}
+                        ref={inputRefs[5]}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -233,7 +207,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyType='next'
                         returnKeyLabel='Next'
                         error={errors.city?.message}
-                        onSubmitEditing={() => inputRefs[9].current?.focus()}
+                        onSubmitEditing={() => inputRefs[6].current?.focus()}
                     />
                 )}
             />
@@ -243,7 +217,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                 name='region'
                 render={({ field: { value, onChange, onBlur } }) => (
                     <BaseTextInput
-                        ref={inputRefs[9]}
+                        ref={inputRefs[6]}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -253,7 +227,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyType='next'
                         returnKeyLabel='Next'
                         error={errors.region?.message}
-                        onSubmitEditing={() => inputRefs[10].current?.focus()}
+                        onSubmitEditing={() => inputRefs[7].current?.focus()}
                     />
                 )}
             />
@@ -263,7 +237,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                 name='postcode'
                 render={({ field: { value, onChange, onBlur } }) => (
                     <BaseTextInput
-                        ref={inputRefs[10]}
+                        ref={inputRefs[7]}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -274,7 +248,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyLabel='Next'
                         autoCapitalize={'characters'}
                         error={errors.postcode?.message}
-                        onSubmitEditing={() => inputRefs[11].current?.focus()}
+                        onSubmitEditing={() => inputRefs[8].current?.focus()}
                     />
                 )}
             />
@@ -299,7 +273,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                 name='website'
                 render={({ field: { value, onChange, onBlur } }) => (
                     <BaseTextInput
-                        ref={inputRefs[11]}
+                        ref={inputRefs[8]}
                         value={value}
                         onChangeText={onChange}
                         onBlur={onBlur}
@@ -309,6 +283,26 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
                         returnKeyType='done'
                         returnKeyLabel='Done'
                         error={errors.website?.message}
+                        onSubmitEditing={() => inputRefs[9].current?.focus()}
+                    />
+                )}
+            />
+
+            <Controller
+                control={control}
+                name='note'
+                render={({ field: { value, onChange, onBlur } }) => (
+                    <BaseTextInput
+                        ref={inputRefs[9]}
+                        value={value}
+                        onChangeText={onChange}
+                        onBlur={onBlur}
+                        label='Note'
+                        placeholder='Enter note'
+                        keyboardType={'default'}
+                        returnKeyType='done'
+                        returnKeyLabel='Done'
+                        error={errors.note?.message}
                     />
                 )}
             />
