@@ -2,7 +2,7 @@ export type QRCodePrimaryType = 'Url' | 'Text' | 'Email' | 'Phone' | 'GeoPos' | 
 export type QRGradientOrientation = 'Horizontal' | 'Vertical' | 'LeftDiagonal' | 'RightDiagonal';
 export type PixelShapeType = 'RoundCorners' | 'Circle' | 'Default';
 export type LogoShapeType = 'Circle' | 'Square' | 'Default';
-export type ErrorDetectionLevelType = 'Low' | 'Medium' | 'Quartile' | 'High';
+export type ErrorCorrectionLevelType = 'Low' | 'Medium' | 'Quartile' | 'High';
 
 export interface ColorConfig {
     type: 'Solid' | 'LinearGradient' | 'RadialGradient' | 'SweepGradient';

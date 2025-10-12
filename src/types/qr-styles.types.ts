@@ -34,7 +34,7 @@ export interface IQRBackgroundStyles {
 }
 
 export interface IQRSettingsStyles {
-    errorDetectionLevel?: string; //'auto' | 'L' | 'M' | 'Q' | 'H';
+    errorCorrectionLevel?: string; //'auto' | 'L' | 'M' | 'Q' | 'H';
     format?: string; //'PNG' | 'JPEG' | 'WEBP';
     size?: string;
     enable4thEye?: boolean;

@@ -1,6 +1,45 @@
+import { COLORS } from '$constants/colors.constants';
+import { EFonts, moderateScale } from '$constants/styles.constants';
 import { IMediaFile } from '$types/common.types';
-import { ErrorDetectionLevelType } from '$types/qr.types';
+import { ErrorCorrectionLevelType } from '$types/qr.types';
+import { showMessage, MessageOptions } from 'react-native-flash-message';
 import { Image } from 'react-native-image-crop-picker';
+
+export const showToastMessage = ({
+    message,
+    type,
+    description,
+    duration,
+    ...rest
+}: MessageOptions): void => {
+
+    showMessage({
+        ...rest,
+        autoHide: true,
+        position: 'top',
+        duration: duration || 3000,
+        type: type ? type : 'danger',
+        message: message,
+        description: description,
+        titleStyle: {
+            fontFamily: EFonts.SEMI_BOLD,
+            fontSize: moderateScale(14),
+            color: COLORS.dark.white
+        },
+        textStyle: {
+            fontFamily: EFonts.MEDIUM,
+            fontSize: moderateScale(15),
+            color: COLORS.dark.white
+        },
+        icon: 'auto',
+        textProps: {
+            numberOfLines: 3
+        },
+        titleProps: {
+            numberOfLines: 2
+        }
+    });
+};
 
 export const generateImageFileSchema = (file: Image): IMediaFile => {
 
@@ -10,7 +49,8 @@ export const generateImageFileSchema = (file: Image): IMediaFile => {
         name: filename || file.filename || 'unknown',
         type: file.mime || 'image/jpeg',
         uri: file.path,
-        base64: `data:${file.mime};base64,${file.data}` || ''
+        base64: file.data || ''
+        // base64: `data:${file.mime};base64,${file.data}` || ''
     };
 };
 
@@ -31,7 +71,7 @@ export function isValidWhatsAppNumber(input: string | number): boolean {
     return validWhatsAppRegex.test(number);
 }
 
-export function getErrorDetectionLevel(level: string): ErrorDetectionLevelType {
+export function getErrorCorrectionLevel(level: string): ErrorCorrectionLevelType {
     switch (level) {
         case 'Auto':
             return 'Quartile';
