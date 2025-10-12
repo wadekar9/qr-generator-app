@@ -20,7 +20,7 @@ import { IconButton, TextButton } from '$components/ui'
 import { QRBackgroundOptionsPage, QRColorOptionsPage, QRLogoOptionsPage, QRSettingsOptionsPage, QRShareOptionsPage } from '$components/pages'
 import { IQRBackgroundStyles, IQRLogoStyles, IQRSettingsStyles, IQRShapeStyles, IQRStyles } from '$types/qr-styles.types'
 import { QRCodeLayout } from '$components/layouts'
-import { getErrorDetectionLevel } from '$utils/helpers'
+import { getErrorCorrectionLevel } from '$utils/helpers'
 
 // Constants for height constraints
 const UPPER_MIN_HEIGHT = DEVICE_HEIGHT * 0.25;  // 30% minimum
@@ -41,8 +41,8 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
     const [activeTab, setActiveTab] = React.useState<number>(0);
 
     const [QRColorStyles, setQRColorStyles] = React.useState<IQRStyles>({
-        primaryColor: ['#000'],
-        backgroundColor: ['#fff'],
+        primaryColor: ['#000000'],
+        backgroundColor: ['#ffffff'],
         primaryColorType: 'solid',
         backgroundColorType: 'solid',
         gradientOrientation: 'Vertical',
@@ -60,20 +60,20 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
         logo: null,
         logoShape: 'Circle',
         crop: false,
-        size: 50,
+        size: 0.4,
         paddingType: 'empty',
-        padding: 10,
+        padding: 0.1,
     });
 
     const [QRBackgroundStyles, setQRBackgroundStyles] = React.useState<IQRBackgroundStyles>({
         background: null,
-        padding: 10,
+        padding: 0,
         xoffset: 0,
         yoffset: 0,
     });
 
     const [QRSettingsStyles, setQRSettingsStyles] = React.useState<IQRSettingsStyles>({
-        errorDetectionLevel: 'Auto',
+        errorCorrectionLevel: 'Auto',
         format: 'PNG',
         size: '1024',
         enable4thEye: false,
@@ -167,7 +167,7 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                         qrCodeData={{ value: 'BizCard' }}
                         qrCodeStyleOptions={{
                             padding: QRBackgroundStyles.padding,
-                            errorCorrectionLevel: getErrorDetectionLevel(QRSettingsStyles.errorDetectionLevel || 'Auto'),
+                            errorCorrectionLevel: getErrorCorrectionLevel(QRSettingsStyles.errorCorrectionLevel || 'Auto'),
                             logo: {
                                 base64: QRLogoStyles.logo || '',
                                 size: QRLogoStyles.size,
@@ -275,11 +275,11 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                                 {activeTab === 4 && (
                                     <QRSettingsOptionsPage
                                         theme={theme}
-                                        errorDetectionLevel={QRSettingsStyles.errorDetectionLevel}
+                                        errorCorrectionLevel={QRSettingsStyles.errorCorrectionLevel}
                                         format={QRSettingsStyles.format}
                                         size={QRSettingsStyles.size}
                                         enable4thEye={QRSettingsStyles.enable4thEye}
-                                        setErrorDetectionLevel={(errorDetectionLevel) => setQRSettingsStyles((prev) => ({ ...prev, errorDetectionLevel }))}
+                                        setErrorCorrectionLevel={(errorCorrectionLevel) => setQRSettingsStyles((prev) => ({ ...prev, errorCorrectionLevel }))}
                                         setFormat={(format) => setQRSettingsStyles((prev) => ({ ...prev, format }))}
                                         setSize={(size) => setQRSettingsStyles((prev) => ({ ...prev, size }))}
                                         setEnable4thEye={(enable4thEye) => setQRSettingsStyles((prev) => ({ ...prev, enable4thEye }))}
