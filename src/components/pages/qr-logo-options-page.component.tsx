@@ -59,7 +59,7 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
                     <View style={styles.imageSection}>
                         <View style={styles.imageSectionImage}>
                             <View style={styles.imageWrapper}>
-                                <Image source={{ uri: logo }} style={{ width: '100%', height: '100%' }} />
+                                <Image source={{ uri: `data:image/png;base64,${logo}` }} style={{ width: '100%', height: '100%' }} />
                             </View>
                         </View>
                         <View style={{ gap: moderateScale(5) }}>
@@ -103,10 +103,11 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
                 <ThemeText theme={theme}>Size</ThemeText>
                 <Slider
                     style={{ width: '100%', height: moderateScale(40) }}
-                    minimumValue={10}
-                    maximumValue={100}
+                    minimumValue={0.15}
+                    maximumValue={1}
                     minimumTrackTintColor={COLORS[theme].primary}
                     maximumTrackTintColor={COLORS[theme].border}
+                    step={0.1}
                     value={size}
                     onSlidingComplete={setSize}
                     thumbTintColor={COLORS[theme].primary}
@@ -129,10 +130,11 @@ const QRLogoOptionsPage: React.FC<QRLogoOptionsPageProps> = ({
                 <ThemeText theme={theme}>Padding</ThemeText>
                 <Slider
                     style={{ width: '100%', height: moderateScale(40) }}
-                    minimumValue={0}
-                    maximumValue={50}
+                    minimumValue={0.1}
+                    maximumValue={1}
                     minimumTrackTintColor={COLORS[theme].primary}
                     maximumTrackTintColor={COLORS[theme].border}
+                    step={0.1}
                     value={padding}
                     onSlidingComplete={setPadding}
                     thumbTintColor={COLORS[theme].primary}

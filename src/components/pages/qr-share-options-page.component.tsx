@@ -110,7 +110,7 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Eye Frame</ThemeText>
-                <BaseTabSelection theme={theme} tabs={['Default', 'RoundCorners', 'Circle']} selectedTab={eyeFrameShape} onTabSelect={(tab) => setEyeFrameShape?.(tab as PixelShapeType)} />
+                <BaseTabSelection theme={theme} tabs={['Default', 'RoundCorners']} selectedTab={eyeFrameShape} onTabSelect={(tab) => setEyeFrameShape?.(tab as PixelShapeType)} />
                 {/* <View style={styles.options}>
                     <IconButton style={[styles.option, eyeFrameShape === 'square' && styles.optionActive]} onPress={() => setEyeFrameShape?.('square')}>
                         <Square width={moderateScale(22)} height={moderateScale(22)} color={eyeFrameShape === 'square' ? COLORS[theme].white : COLORS[theme].text} />
@@ -136,7 +136,7 @@ const QRShareOptionsPage: React.FC<QRShareOptionsPageProps> = ({
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Eye Ball</ThemeText>
-                <BaseTabSelection theme={theme} tabs={['Default', 'RoundCorners', 'Circle']} selectedTab={eyeBallShape} onTabSelect={(tab) => setEyeBallShape?.(tab as PixelShapeType)} />
+                <BaseTabSelection theme={theme} tabs={['Default', 'RoundCorners']} selectedTab={eyeBallShape} onTabSelect={(tab) => setEyeBallShape?.(tab as PixelShapeType)} />
                 {/* <View style={styles.options}>
                     <IconButton style={[styles.option, eyeBallShape === 'square' && styles.optionActive]} onPress={() => setEyeBallShape?.('square')}>
                         <Square width={moderateScale(22)} height={moderateScale(22)} fill={eyeBallShape === 'square' ? COLORS[theme].white : COLORS[theme].text} strokeWidth={0} />

@@ -7,12 +7,12 @@ import { COLORS } from '$constants/colors.constants'
 
 interface QRSettingsOptionsPageProps {
     theme: ITheme;
-    errorDetectionLevel?: string; //'auto' | 'L' | 'M' | 'Q' | 'H';
+    errorCorrectionLevel?: string; //'auto' | 'L' | 'M' | 'Q' | 'H';
     format?: string; //'PNG' | 'JPEG' | 'WEBP';
     size?: string;
     enable4thEye?: boolean;
 
-    setErrorDetectionLevel: (errorDetectionLevel: string) => void;
+    setErrorCorrectionLevel: (errorCorrectionLevel: string) => void;
     setFormat: (format: string) => void;
     setSize: (size: string) => void;
     setEnable4thEye: (enable4thEye: boolean) => void;
@@ -20,8 +20,8 @@ interface QRSettingsOptionsPageProps {
 
 const QRSettingsOptionsPage: React.FC<QRSettingsOptionsPageProps> = ({
     theme,
-    errorDetectionLevel = 'L',
-    setErrorDetectionLevel,
+    errorCorrectionLevel = 'L',
+    setErrorCorrectionLevel,
     format = 'PNG',
     setFormat,
     size = '1024',
@@ -64,7 +64,7 @@ const QRSettingsOptionsPage: React.FC<QRSettingsOptionsPageProps> = ({
 
             <View style={styles.section}>
                 <ThemeText theme={theme}>Error Detection Level</ThemeText>
-                <BaseTabSelection theme={theme} tabs={['Auto', 'L', 'M', 'Q', 'H']} selectedTab={errorDetectionLevel} onTabSelect={(tab) => setErrorDetectionLevel?.(tab)} />
+                <BaseTabSelection theme={theme} tabs={['Auto', 'L', 'M', 'Q', 'H']} selectedTab={errorCorrectionLevel} onTabSelect={(tab) => setErrorCorrectionLevel?.(tab)} />
                 <ThemeText theme={theme} style={styles.label}>
                     {`Defines the part of the code that can be corrupted or used for the logo.\nPrefer Auto error correction level if you have a logo.`}
                 </ThemeText>

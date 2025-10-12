@@ -51,7 +51,7 @@ const QRBackgroundOptionsPage: React.FC<QRBackgroundOptionsPageProps> = ({
                     <View style={styles.imageSection}>
                         <View style={styles.imageSectionImage}>
                             <View style={styles.imageWrapper}>
-                                <Image source={{ uri: background }} style={{ width: '100%', height: '100%' }} />
+                                <Image source={{ uri: `data:image/png;base64,${background}` }} style={{ width: '100%', height: '100%' }} />
                             </View>
                         </View>
                         <View style={{ gap: moderateScale(5) }}>
@@ -70,7 +70,7 @@ const QRBackgroundOptionsPage: React.FC<QRBackgroundOptionsPageProps> = ({
                 <Slider
                     style={{ width: '100%', height: moderateScale(40) }}
                     minimumValue={0}
-                    maximumValue={100}
+                    maximumValue={15}
                     minimumTrackTintColor={COLORS[theme].primary}
                     maximumTrackTintColor={COLORS[theme].border}
                     value={padding}
