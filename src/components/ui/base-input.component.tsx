@@ -142,7 +142,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'stretch',
-        height: moderateScale(50)
+        height: moderateScale(53)
     },
     textInput: {
         flex: 1,
@@ -161,7 +161,7 @@ const styling = (theme: ITheme) => StyleSheet.create({
         flexWrap: 'wrap',
     },
     icon: {
-        height: moderateScale(50),
+        height: moderateScale(53),
         paddingHorizontal: moderateScale(12),
         alignItems: 'center',
         justifyContent: 'center',

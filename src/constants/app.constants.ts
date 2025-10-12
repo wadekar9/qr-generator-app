@@ -31,10 +31,10 @@ export const QR_TYPES: { type: QRType; label: string; icon: any }[] = [
 ];
 
 export const WIFI_TYPES = [
-    { label: 'None', value: 'none' },
-    { label: 'WEP', value: 'wep' },
-    { label: 'WPA', value: 'wpa' },
-    { label: 'WPA2', value: 'wpa2' }
+    { label: 'None', value: 'NONE' },
+    { label: 'WEP', value: 'WEP' },
+    { label: 'WPA', value: 'WPA' },
+    { label: 'WPA2', value: 'WPA2' }
 ];
 
 export const NAME_PREFIXES = [

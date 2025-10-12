@@ -1,11 +1,11 @@
-import { View, Text } from 'react-native'
-import React, { useCallback } from 'react'
-import { RootStackScreenProps } from '$types/navigation.types'
-import { EStackScreens } from '$constants/screen.constants'
-import { ThemedView } from '$components/containers'
-import { useAppTheme } from '$hooks/common'
-import { styling } from './styles'
-import { BackHeader } from '$components/navigation'
+import { View, Text } from 'react-native';
+import React, { useCallback } from 'react';
+import { RootStackScreenProps } from '$types/navigation.types';
+import { EStackScreens } from '$constants/screen.constants';
+import { ThemedView } from '$components/containers';
+import { useAppTheme } from '$hooks/common';
+import { styling } from './styles';
+import { BackHeader } from '$components/navigation';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -13,14 +13,14 @@ import Animated, {
     interpolate,
     Extrapolation,
     withTiming,
-} from 'react-native-reanimated';
-import { DEVICE_HEIGHT, DEVICE_WIDTH } from '$constants/styles.constants'
-import { QR_STYLING_OPTIONS } from '$constants/app.constants'
-import { IconButton, TextButton } from '$components/ui'
-import { QRBackgroundOptionsPage, QRColorOptionsPage, QRLogoOptionsPage, QRSettingsOptionsPage, QRShareOptionsPage } from '$components/pages'
-import { IQRBackgroundStyles, IQRLogoStyles, IQRSettingsStyles, IQRShapeStyles, IQRStyles } from '$types/qr-styles.types'
-import { QRCodeLayout } from '$components/layouts'
-import { getErrorCorrectionLevel } from '$utils/helpers'
+} from 'react-native-reanimated';;
+import { DEVICE_HEIGHT, DEVICE_WIDTH } from '$constants/styles.constants';
+import { QR_STYLING_OPTIONS } from '$constants/app.constants';
+import { IconButton, TextButton } from '$components/ui';
+import { QRBackgroundOptionsPage, QRColorOptionsPage, QRLogoOptionsPage, QRSettingsOptionsPage, QRShareOptionsPage } from '$components/pages';
+import { IQRBackgroundStyles, IQRLogoStyles, IQRSettingsStyles, IQRShapeStyles, IQRStyles } from '$types/qr-styles.types';
+import { QRCodeLayout } from '$components/layouts';
+import { getErrorCorrectionLevel, getQRType } from '$utils/helpers';
 
 // Constants for height constraints
 const UPPER_MIN_HEIGHT = DEVICE_HEIGHT * 0.25;  // 30% minimum
@@ -163,8 +163,8 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                 <Animated.View style={[styles.upperBlock, upperBlockStyle]}>
                     <QRCodeLayout
                         scrollY={scrollY}
-                        qrCodeType='Text'
-                        qrCodeData={{ value: 'BizCard' }}
+                        qrCodeType={getQRType(params?.type || 'text')}
+                        qrCodeData={params?.data ? JSON.parse(params?.data) : { value: 'Hello!' }}
                         qrCodeStyleOptions={{
                             padding: QRBackgroundStyles.padding,
                             errorCorrectionLevel: getErrorCorrectionLevel(QRSettingsStyles.errorCorrectionLevel || 'Auto'),

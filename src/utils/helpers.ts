@@ -1,7 +1,7 @@
 import { COLORS } from '$constants/colors.constants';
 import { EFonts, moderateScale } from '$constants/styles.constants';
 import { IMediaFile } from '$types/common.types';
-import { ErrorCorrectionLevelType } from '$types/qr.types';
+import { ErrorCorrectionLevelType, QRCodePrimaryType, QRType } from '$types/qr.types';
 import { showMessage, MessageOptions } from 'react-native-flash-message';
 import { Image } from 'react-native-image-crop-picker';
 
@@ -85,5 +85,31 @@ export function getErrorCorrectionLevel(level: string): ErrorCorrectionLevelType
             return 'High';
         default:
             return 'Quartile';
+    }
+}
+
+export function getQRType(type: QRType): QRCodePrimaryType {
+    switch (type) {
+        case 'url':
+        case 'whatsapp':
+            return 'Url';
+        case 'text':
+            return 'Text';
+        case 'email':
+            return 'Email';
+        case 'phone':
+            return 'Phone';
+        case 'location':
+            return 'GeoPos';
+        case 'wifi':
+            return 'WiFi';
+        case 'sms':
+            return 'SMS';
+        case 'contact':
+            return 'VCard';
+        case 'event':
+            return 'Event';
+        default:
+            return 'Text';
     }
 }
