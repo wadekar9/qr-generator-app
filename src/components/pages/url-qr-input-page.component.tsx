@@ -18,7 +18,7 @@ const URLQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ t
     });
 
     const onSubmit = useCallback((values: WebQrValidatorSchema) => {
-        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, { type: 'url', data: JSON.stringify({ value: values.url }) }));
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, { type: 'url', data: JSON.stringify({ value: values.url, content: values.url }) }));
     }, [])
 
     useImperativeHandle(ref, () => ({

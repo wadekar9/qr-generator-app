@@ -20,7 +20,7 @@ const PhoneQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({
     const onSubmit = useCallback((values: PhoneQrValidatorSchema) => {
         stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
             type: 'phone',
-            data: JSON.stringify({ phoneNumber: values.phone })
+            data: JSON.stringify({ content: values.phone, phoneNumber: values.phone })
         }));
     }, [])
 

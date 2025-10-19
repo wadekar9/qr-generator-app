@@ -25,6 +25,7 @@ const LocationQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>
         stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
             type: 'location',
             data: JSON.stringify({
+                content: values.latitude + ', ' + values.longitude,
                 lat: +values.latitude,
                 lon: +values.longitude,
                 query: values.query

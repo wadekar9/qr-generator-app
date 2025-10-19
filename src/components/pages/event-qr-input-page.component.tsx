@@ -26,6 +26,7 @@ const EventQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({
         stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
             type: 'event',
             data: JSON.stringify({
+                content: values.title,
                 organizer: values.organizor,
                 start: values.startDateTime,
                 end: values.endDateTime,

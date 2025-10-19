@@ -24,6 +24,7 @@ const SMSQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ t
         stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
             type: 'sms',
             data: JSON.stringify({
+                content: values.phone,
                 phoneNumber: values.phone,
                 subject: values.message,
                 isMMS: false

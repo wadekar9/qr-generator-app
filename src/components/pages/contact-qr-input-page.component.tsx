@@ -38,6 +38,7 @@ const ContactQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(
         stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
             type: 'contact',
             data: JSON.stringify({
+                content: values.firstName + ' ' + values.lastName,
                 name: values.firstName + ' ' + values.lastName,
                 company: values.organization,
                 title: values.prefix,

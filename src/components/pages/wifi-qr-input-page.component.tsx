@@ -27,6 +27,7 @@ const WifiQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ 
         stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
             type: 'wifi',
             data: JSON.stringify({
+                content: values.network,
                 ssid: values.network,
                 psk: values.password,
                 hidden: values.hidden,

@@ -25,6 +25,7 @@ const EmailQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({
         stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
             type: 'email',
             data: JSON.stringify({
+                content: values.email,
                 email: values.email,
                 subject: values.subject,
                 body: values.message

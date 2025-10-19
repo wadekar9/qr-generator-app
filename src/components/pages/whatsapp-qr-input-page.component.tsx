@@ -24,6 +24,7 @@ const WhatsappQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>
         stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
             type: 'whatsapp',
             data: JSON.stringify({
+                content: values.mobile,
                 value: `https://wa.me/${values.mobile}?text=${values.message}`
             })
         }));
