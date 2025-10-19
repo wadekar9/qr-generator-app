@@ -91,7 +91,8 @@ export type QRType =
     | 'contact'
     | 'location'
     | 'event'
-    | 'whatsapp';
+    | 'whatsapp'
+    | 'google-review';
 
 export interface QRData {
     // Text
@@ -127,12 +128,4 @@ export interface QRData {
     startDate?: string;
     endDate?: string;
     description?: string;
-}
-
-export interface QRHistoryItem {
-    id?: string;
-    type: QRType;
-    content: string;
-    data: QRData;
-    timestamp: number;
 }

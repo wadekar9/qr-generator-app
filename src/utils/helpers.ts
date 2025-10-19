@@ -4,6 +4,9 @@ import { IMediaFile } from '$types/common.types';
 import { ErrorCorrectionLevelType, QRCodePrimaryType, QRType } from '$types/qr.types';
 import { showMessage, MessageOptions } from 'react-native-flash-message';
 import { Image } from 'react-native-image-crop-picker';
+import { getData, storeData } from './storage';
+import { EStorageKeys } from '$constants/storage.constants';
+import { IHistory } from '$types/history.types';
 
 export const showToastMessage = ({
     message,
@@ -111,5 +114,27 @@ export function getQRType(type: QRType): QRCodePrimaryType {
             return 'Event';
         default:
             return 'Text';
+    }
+}
+
+export async function handleSaveToHistory(qrcode: IHistory) {
+    try {
+        const history = await getData(EStorageKeys.QR_HISTORY);
+        const parsedHistory = history ? JSON.parse(history) : [];
+        const updatedHistory = [...parsedHistory, qrcode];
+        await storeData(EStorageKeys.QR_HISTORY, JSON.stringify(updatedHistory));
+    } catch (error) {
+        console.error("ERROR", error);
+    }
+}
+
+export async function getQRHistory(): Promise<IHistory[]> {
+    try {
+        const history = await getData(EStorageKeys.QR_HISTORY);
+        const parsedHistory = history ? JSON.parse(history) : [];
+        return parsedHistory;
+    } catch (error) {
+        console.error("ERROR", error);
+        return [];
     }
 }

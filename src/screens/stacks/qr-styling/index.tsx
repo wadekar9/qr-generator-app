@@ -21,6 +21,7 @@ import { QRBackgroundOptionsPage, QRColorOptionsPage, QRLogoOptionsPage, QRSetti
 import { IQRBackgroundStyles, IQRLogoStyles, IQRSettingsStyles, IQRShapeStyles, IQRStyles } from '$types/qr-styles.types';
 import { QRCodeLayout } from '$components/layouts';
 import { getErrorCorrectionLevel, getQRType } from '$utils/helpers';
+import { useHistory } from '$hooks/module';
 
 // Constants for height constraints
 const UPPER_MIN_HEIGHT = DEVICE_HEIGHT * 0.25;  // 30% minimum
@@ -33,6 +34,7 @@ const MAX_SCROLL_DISTANCE = 150;
 
 const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ navigation, route: { params } }) => {
 
+    const { addQRCode } = useHistory();
     const { theme, colors } = useAppTheme();
     const styles = styling(theme);
     const scrollY = useSharedValue(0);
@@ -145,6 +147,24 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
         )
     }, [QR_STYLING_OPTIONS, colors, activeTab, onChooseTab])
 
+    const handleComplete = useCallback(() => {
+        try {
+            if (generatedQR.current) {
+                const data = JSON.parse(params?.data);
+                addQRCode({
+                    type: params?.type || 'text',
+                    content: data?.content || 'QR Code',
+                    data: params?.data || 'Hello!',
+                    base64: generatedQR.current,
+                    timestamp: Date.now()
+                })
+                navigation.navigate(EStackScreens.QR_RESULT, { base64: generatedQR.current })
+            }
+        } catch (error: any) {
+            console.error("ERROR", error);
+        }
+    }, [addQRCode]);
+
     return (
         <ThemedView>
             <BackHeader
@@ -154,7 +174,7 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                     <TextButton
                         label='Save'
                         labelStyle={styles.shareButtonText}
-                        onPress={() => generatedQR.current && navigation.navigate(EStackScreens.QR_RESULT, { base64: generatedQR.current })}
+                        onPress={() => handleComplete()}
                     />
                 }
             />
