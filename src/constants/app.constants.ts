@@ -1,4 +1,4 @@
-import { WhatsApp } from '$assets/icons';
+import { WhatsApp, Google } from '$assets/icons';
 import { QRType } from '$types/qr.types';
 import {
     Globe,
@@ -9,16 +9,16 @@ import {
     User,
     MapPin,
     Calendar,
-    Hash,
     Palette,
     Shapes,
     Focus,
     Frame,
-    Settings
+    Settings,
+    Type
 } from 'lucide-react-native';
 
 export const QR_TYPES: { type: QRType; label: string; icon: any }[] = [
-    { type: 'text', label: 'Text', icon: Hash },
+    { type: 'text', label: 'Text', icon: Type },
     { type: 'url', label: 'URL', icon: Globe },
     { type: 'email', label: 'Email', icon: Mail },
     { type: 'wifi', label: 'Wi-Fi', icon: Wifi },
@@ -28,6 +28,7 @@ export const QR_TYPES: { type: QRType; label: string; icon: any }[] = [
     { type: 'location', label: 'Location', icon: MapPin },
     { type: 'event', label: 'Event', icon: Calendar },
     { type: 'whatsapp', label: 'WhatsApp', icon: WhatsApp },
+    { type: 'google-review', label: 'Google', icon: Google },
 ];
 
 export const WIFI_TYPES = [

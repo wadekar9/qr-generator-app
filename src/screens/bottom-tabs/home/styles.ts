@@ -20,7 +20,7 @@ export const styling = (theme: ITheme, insets: EdgeInsets) => StyleSheet.create(
         flex: 1,
         flexGrow: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         flexWrap: 'wrap',
         gap: moderateScale(10)
     },
