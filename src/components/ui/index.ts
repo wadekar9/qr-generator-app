@@ -10,4 +10,5 @@ export { default as BaseInputAccessoryView } from './base-input-accessory-view.c
 export { default as BaseDatePicker } from './base-date-picker.component';
 export { default as BaseCheckbox } from './base-checkbox.component';
 export { default as BaseTabSelection } from './base-tab-selection.component';
+export { default as BaseBottomSheet } from './base-bottom-sheet.component';
 export { BaseLabelCheckbox } from './base-checkbox.component';
