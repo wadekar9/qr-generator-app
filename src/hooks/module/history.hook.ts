@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { getData, storeData } from '$utils/storage';
 import { EStorageKeys } from '$constants/storage.constants';
 import { IHistory } from '$types/history.types';
+import { handleShare } from '$utils/qr-helpers';
 
 export const useHistory = () => {
 
@@ -61,6 +62,12 @@ export const useHistory = () => {
         saveHistory([]);
     }, [saveHistory]);
 
+    const shareQRCode = useCallback((id: string) => {
+        const qrCode = history.find(item => item.id === id);
+        if (!qrCode) return;
+        handleShare(qrCode.base64);
+    }, [history]);
+
     return useMemo(() => ({
         history,
         addQRCode,
@@ -68,6 +75,7 @@ export const useHistory = () => {
         removeQRCode,
         clearHistory,
         loadHistory,
+        shareQRCode,
         loading
-    }), [history, addQRCode, addScannedQR, removeQRCode, clearHistory, loading, loadHistory]);
+    }), [history, addQRCode, addScannedQR, removeQRCode, clearHistory, loading, loadHistory, shareQRCode]);
 };
