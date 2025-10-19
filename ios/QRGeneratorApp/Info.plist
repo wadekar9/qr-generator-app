@@ -61,5 +61,7 @@
 		<string>Poppins-SemiBold.ttf</string>
 		<string>Poppins-Thin.ttf</string>
 	</array>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This app saves generated QR images to your photo library.</string>
 </dict>
 </plist>
