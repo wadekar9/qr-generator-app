@@ -1,7 +1,7 @@
 export enum EStackScreens {
     BOTTOM_TAB_NAVIGATOR = 'BottomTabNavigator',
     HISTORY = 'History',
-    PRIVACY_POLICY = 'PrivacyPolicy',
+    QR_RESULT = 'QRResult',
     QR_SCANNER = 'QRScanner',
     QR_GENERATOR = 'QRGenerator',
     QR_STYLING = 'QRStyling',

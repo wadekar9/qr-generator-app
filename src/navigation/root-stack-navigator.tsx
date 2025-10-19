@@ -19,7 +19,7 @@ const RootStackNavigator = () => {
                 <RootStack.Screen name={EStackScreens.QR_GENERATOR} component={StacksRoutes.QRGenerator} />
                 <RootStack.Screen name={EStackScreens.QR_SCANNER} component={StacksRoutes.QRScanner} />
                 <RootStack.Screen name={EStackScreens.HISTORY} component={StacksRoutes.History} />
-                <RootStack.Screen name={EStackScreens.PRIVACY_POLICY} component={StacksRoutes.PrivacyPolicy} />
+                <RootStack.Screen name={EStackScreens.QR_RESULT} component={StacksRoutes.QRResult} />
                 <RootStack.Screen name={EStackScreens.QR_STYLING} component={StacksRoutes.QRStyling} />
             </RootStack.Navigator>
         </NavigationContainer>

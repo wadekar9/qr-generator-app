@@ -7,7 +7,6 @@ import {
 import {
     Moon,
     Sun,
-    Shield,
     FileText,
     Smartphone,
     Share
@@ -53,14 +52,6 @@ const Settings: React.FC<BottomTabStackScreenProps<EBottomTabScreens.SETTINGS>> 
                     title="History"
                     subtitle="View your generated code history"
                     onPress={() => stackNavigationRef.current?.navigate(EStackScreens.HISTORY)}
-                />
-
-                <SettingsItem
-                    theme={theme}
-                    Icon={<Shield color={colors.primary} width={24} height={24} />}
-                    title="Privacy Policy"
-                    subtitle="How we handle your data"
-                    onPress={() => stackNavigationRef.current?.navigate(EStackScreens.PRIVACY_POLICY)}
                 />
 
                 <SettingsItem

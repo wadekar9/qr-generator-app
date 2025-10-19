@@ -15,7 +15,7 @@ export type RootStackParamsList = {
     [EStackScreens.QR_SCANNER]: undefined;
     [EStackScreens.QR_GENERATOR]: { type: QRType };
     [EStackScreens.QR_STYLING]: { type: QRType, data: string };
-    [EStackScreens.PRIVACY_POLICY]: undefined;
+    [EStackScreens.QR_RESULT]: { base64: string; };
 }
 
 export type RootStackScreenProps<T extends keyof RootStackParamsList> = NativeStackScreenProps<RootStackParamsList, T>;
