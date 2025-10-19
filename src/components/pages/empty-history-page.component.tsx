@@ -1,16 +1,17 @@
-import { StyleSheet, View } from 'react-native'
+import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { ITheme } from '$types/common.types'
-import { DEVICE_WIDTH, EFonts, moderateScale } from '$constants/styles.constants';
+import { DEVICE_HEIGHT, DEVICE_WIDTH, EFonts, moderateScale } from '$constants/styles.constants';
 import { Hash } from 'lucide-react-native';
 import { COLORS } from '$constants/colors.constants';
 import { ThemeText } from '$components/ui';
 
 interface EmptyHistoryPageProps {
     theme: ITheme;
+    loading: boolean;
 }
 
-const EmptyHistoryPage: React.FC<EmptyHistoryPageProps> = ({ theme }) => {
+const EmptyHistoryPage: React.FC<EmptyHistoryPageProps> = ({ theme, loading }) => {
     return (
         <View style={styles.container}>
             <View style={[styles.iconWrapper, { backgroundColor: COLORS[theme].text }]}>
@@ -22,6 +23,11 @@ const EmptyHistoryPage: React.FC<EmptyHistoryPageProps> = ({ theme }) => {
             <ThemeText theme={theme} style={[styles.message, { color: COLORS[theme].primary }]}>
                 Your generated and scanned QR codes will appear here. Start by creating or scanning a QR code!
             </ThemeText>
+            {loading && (
+                <View style={[styles.loader, { backgroundColor: COLORS[theme].background }]}>
+                    <ActivityIndicator size={'large'} color={COLORS[theme].primary} />
+                </View>
+            )}
         </View>
     )
 }
@@ -55,4 +61,11 @@ const styles = StyleSheet.create({
         lineHeight: moderateScale(22),
         width: DEVICE_WIDTH * 0.85
     },
+    loader: {
+        position: 'absolute',
+        width: DEVICE_WIDTH,
+        height: DEVICE_HEIGHT,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 })

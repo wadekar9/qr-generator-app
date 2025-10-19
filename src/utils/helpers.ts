@@ -8,6 +8,14 @@ import { getData, storeData } from './storage';
 import { EStorageKeys } from '$constants/storage.constants';
 import { IHistory } from '$types/history.types';
 
+export const formatDate = (timestamp: number) => {
+    const date = new Date(timestamp);
+    return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+};
+
 export const showToastMessage = ({
     message,
     type,

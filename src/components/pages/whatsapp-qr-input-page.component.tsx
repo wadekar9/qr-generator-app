@@ -8,9 +8,13 @@ import { TextInput } from 'react-native'
 import { stackNavigationRef } from '$types/navigation.types'
 import { CommonActions } from '@react-navigation/native'
 import { EStackScreens } from '$constants/screen.constants'
+import { generateQRCode } from '$native/QRGenerator'
+import { whatsAppBase64 } from '$constants/content.constants'
+import { useHistory } from '$hooks/module'
 
 const WhatsappQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ theme }, ref) => {
 
+    const { addQRCode } = useHistory();
     const messageRef = useRef<TextInput>(null);
     const { control, handleSubmit, formState: { errors } } = useForm<WhatsappQrValidatorSchema>({
         defaultValues: {
@@ -20,14 +24,50 @@ const WhatsappQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>
         resolver: zodResolver(whatsappQrValidator)
     });
 
-    const onSubmit = useCallback((values: WhatsappQrValidatorSchema) => {
-        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_STYLING, {
+    const onSubmit = useCallback(async (values: WhatsappQrValidatorSchema) => {
+
+        const qrImage = await generateQRCode({
+            value: `https://wa.me/${values.mobile}?text=${values.message}`,
+            type: 'Url'
+        }, {
+            padding: 0.05,
+            errorCorrectionLevel: 'High',
+            logo: {
+                base64: whatsAppBase64,
+                size: 0.3,
+                padding: 0.0,
+                shape: 'Square',
+            },
+            background: { color: '#ffffff' },
+            colors: {
+                dark: {
+                    type: 'Solid',
+                    color: '#25D366'
+                }
+            },
+            shapes: {
+                darkPixel: {
+                    type: 'Circle'
+                },
+                ball: {
+                    type: 'Default'
+                },
+                frame: {
+                    type: 'Default'
+                },
+            }
+        });
+        addQRCode({
             type: 'whatsapp',
+            content: values.mobile,
             data: JSON.stringify({
-                content: values.mobile,
-                value: `https://wa.me/${values.mobile}?text=${values.message}`
-            })
-        }));
+                value: `https://wa.me/${values.mobile}?text=${values.message}`,
+                type: 'Url'
+            }),
+            base64: qrImage,
+            timestamp: Date.now()
+        })
+        stackNavigationRef.current?.dispatch(CommonActions.navigate(EStackScreens.QR_RESULT, { base64: qrImage }))
     }, [])
 
     useImperativeHandle(ref, () => ({

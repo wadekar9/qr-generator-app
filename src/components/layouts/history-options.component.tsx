@@ -4,11 +4,11 @@ import { EFonts, EFontSize, moderateScale } from '$constants/styles.constants'
 import { ITheme } from '$types/common.types'
 import { COLORS } from '$constants/colors.constants'
 import { IconButton, ThemeText } from '$components/ui'
-import { Share2, Trash2 } from 'lucide-react-native'
+import { Save, Share2, Trash2 } from 'lucide-react-native'
 
 interface HistoryOptionsProps {
     theme: ITheme;
-    onChooseOption: (option: 'share' | 'delete') => void;
+    onChooseOption: (option: 'save' | 'share' | 'delete') => void;
 }
 
 const HistoryOptions: React.FC<HistoryOptionsProps> = ({ theme, onChooseOption }) => {
@@ -17,12 +17,12 @@ const HistoryOptions: React.FC<HistoryOptionsProps> = ({ theme, onChooseOption }
 
     return (
         <View style={styles.options}>
-            {/* <IconButton style={styles.option} onPress={() => onChooseOption('edit')}>
+            <IconButton style={styles.option} onPress={() => onChooseOption('save')}>
                 <View style={styles.icon}>
-                    <SquarePen color={COLORS[theme].text} width={moderateScale(25)} height={moderateScale(25)} />
+                    <Save color={COLORS[theme].text} width={moderateScale(25)} height={moderateScale(25)} />
                 </View>
-                <ThemeText theme={theme}>Edit</ThemeText>
-            </IconButton> */}
+                <ThemeText theme={theme}>Save</ThemeText>
+            </IconButton>
             <IconButton style={styles.option} onPress={() => onChooseOption('share')}>
                 <View style={styles.icon}>
                     <Share2 color={COLORS[theme].text} width={moderateScale(25)} height={moderateScale(25)} />

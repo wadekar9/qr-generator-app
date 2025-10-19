@@ -28,13 +28,13 @@ export const handleSave = async (base64: string) => {
         showToastMessage({
             message: 'Saved',
             type: 'success',
-            description: 'The QR image has been saved to your gallery.',
+            description: 'The QR code has been saved to your gallery.',
         });
     } catch (error: any) {
         showToastMessage({
             message: 'Save failed',
             type: 'danger',
-            description: error?.message || 'Unable to save image.',
+            description: error?.message || 'Unable to save qr code.',
         });
     }
 }

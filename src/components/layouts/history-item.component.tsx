@@ -7,6 +7,7 @@ import { IconButton, ThemeText } from '$components/ui';
 import { EllipsisVertical } from 'lucide-react-native';
 import { QR_TYPES } from '$constants/app.constants';
 import { IHistory } from '$types/history.types';
+import { formatDate } from '$utils/helpers';
 
 interface HistoryItemProps {
     qrHistory: IHistory;
@@ -22,7 +23,7 @@ const HistoryItem: React.FC<HistoryItemProps> = ({ theme, qrHistory, onOptionsPr
         const QRTypeIcon = QR_TYPES.find((qrType) => qrType.type === qrHistory.type)?.icon;
         return (
             <IconButton onPress={() => { }} style={styles.icon}>
-                <QRTypeIcon color={COLORS[theme].text} width={moderateScale(25)} height={moderateScale(25)} />
+                <QRTypeIcon color={COLORS[theme].primary} width={moderateScale(25)} height={moderateScale(25)} />
             </IconButton>
         )
     }, [QR_TYPES]);
@@ -33,7 +34,7 @@ const HistoryItem: React.FC<HistoryItemProps> = ({ theme, qrHistory, onOptionsPr
                 <Icon />
                 <View style={{ flex: 1 }}>
                     <ThemeText theme={theme} numberOfLines={1} style={styles.title}>{qrHistory.content}</ThemeText>
-                    <ThemeText theme={theme} numberOfLines={1} style={styles.date}>{new Date(qrHistory.timestamp).toUTCString()}</ThemeText>
+                    <ThemeText theme={theme} numberOfLines={1} style={styles.date}>{formatDate(qrHistory.timestamp)}</ThemeText>
                 </View>
                 <IconButton onPress={() => onOptionsPress()} style={styles.icon}>
                     <EllipsisVertical color={COLORS[theme].text} width={moderateScale(25)} height={moderateScale(25)} />
@@ -74,6 +75,6 @@ const styling = (theme: ITheme) => StyleSheet.create({
     date: {
         fontSize: EFontSize.SM,
         fontFamily: EFonts.REGULAR,
-        color: COLORS[theme].text
+        color: COLORS[theme].text4
     }
 })

@@ -33,6 +33,7 @@ const QRGenerator: React.FC<RootStackScreenProps<EStackScreens.QR_GENERATOR>> = 
             case 'text':
                 return <TextQRInputPage ref={pageRef} theme={theme} />
             case 'url':
+            case 'google-review':
                 return <URLQRInputPage ref={pageRef} theme={theme} />
             case 'email':
                 return <EmailQRInputPage ref={pageRef} theme={theme} />

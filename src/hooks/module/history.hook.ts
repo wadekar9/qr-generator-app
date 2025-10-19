@@ -1,8 +1,8 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { getData, storeData } from '$utils/storage';
 import { EStorageKeys } from '$constants/storage.constants';
 import { IHistory } from '$types/history.types';
-import { handleShare } from '$utils/qr-helpers';
+import { handleShare, handleSave } from '$utils/qr-helpers';
 
 export const useHistory = () => {
 
@@ -36,7 +36,7 @@ export const useHistory = () => {
     }, []);
 
     const addQRCode = useCallback((qrCode: Omit<IHistory, 'id'>) => {
-        if (!qrCode?.data?.trim() || qrCode.data.length > 10000) return;
+        if (!qrCode?.data?.trim()) return;
         const newQRCode: IHistory = {
             ...qrCode,
             id: Date.now().toString() + Math.random().toString(36).slice(2, 11),
@@ -68,6 +68,16 @@ export const useHistory = () => {
         handleShare(qrCode.base64);
     }, [history]);
 
+    const saveQRCode = useCallback((id: string) => {
+        const qrCode = history.find(item => item.id === id);
+        if (!qrCode) return;
+        handleSave(qrCode.base64);
+    }, [history]);
+
+    useEffect(() => {
+        loadHistory();
+    }, []);
+
     return useMemo(() => ({
         history,
         addQRCode,
@@ -76,6 +86,7 @@ export const useHistory = () => {
         clearHistory,
         loadHistory,
         shareQRCode,
+        saveQRCode,
         loading
-    }), [history, addQRCode, addScannedQR, removeQRCode, clearHistory, loading, loadHistory, shareQRCode]);
+    }), [history, addQRCode, addScannedQR, removeQRCode, clearHistory, loading, loadHistory, shareQRCode, saveQRCode]);
 };
