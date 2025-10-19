@@ -123,13 +123,13 @@ const styles = StyleSheet.create({
     },
     qrImage: {
         width: moderateScale(200),
-        height: moderateScale(200)
+        height: moderateScale(200),
+        resizeMode: 'contain'
     },
     imageWrapper: {
         backgroundColor: 'white',
-        width: moderateScale(220),
-        height: moderateScale(220),
         justifyContent: 'center',
         alignItems: 'center',
+        resizeMode: 'contain'
     }
 })

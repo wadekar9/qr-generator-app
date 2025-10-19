@@ -69,12 +69,18 @@ const validateData = (data: QRCodeData) => {
 
 const normalizeOptions = (options: QRCodeOptions): QRCodeOptions => {
     const normalized: QRCodeOptions = { ...options };
-    if (normalized.padding != null) normalized.padding = Math.max(0, Math.floor(normalized.padding));
+    if (normalized.padding != null) {
+        // Keep fractional padding; ensure non-negative
+        normalized.padding = Math.max(0, normalized.padding);
+    }
     if (!normalized.errorCorrectionLevel) normalized.errorCorrectionLevel = 'Medium';
     if (normalized.logo) {
         const l = { ...normalized.logo };
         if (l.size != null) l.size = clamp(l.size, 0, 1);
-        if (l.padding != null) l.padding = Math.max(0, Math.floor(l.padding));
+        if (l.padding != null) {
+            // Logo padding is a relative fraction in [0,1]
+            l.padding = clamp(l.padding, 0, 1);
+        }
         normalized.logo = l;
     }
     if (normalized.background) {

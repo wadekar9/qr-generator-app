@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native';
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { RootStackScreenProps } from '$types/navigation.types';
 import { EStackScreens } from '$constants/screen.constants';
 import { ThemedView } from '$components/containers';
@@ -37,6 +37,7 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
     const styles = styling(theme);
     const scrollY = useSharedValue(0);
     const tabIndicatorX = useSharedValue(0);
+    const generatedQR = useRef<string | undefined>(undefined);
 
     const [activeTab, setActiveTab] = React.useState<number>(0);
 
@@ -67,7 +68,7 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
 
     const [QRBackgroundStyles, setQRBackgroundStyles] = React.useState<IQRBackgroundStyles>({
         background: null,
-        padding: 0,
+        padding: 0.1,
         xoffset: 0,
         yoffset: 0,
     });
@@ -153,7 +154,7 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                     <TextButton
                         label='Save'
                         labelStyle={styles.shareButtonText}
-                        onPress={() => console.log('Save')}
+                        onPress={() => generatedQR.current && navigation.navigate(EStackScreens.QR_RESULT, { base64: generatedQR.current })}
                     />
                 }
             />
@@ -190,6 +191,7 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
                                 frame: QRShapeStyles.eyeFrameShape,
                             },
                         }}
+                        onGenerateQR={(qrCode) => generatedQR.current = qrCode}
                     />
                 </Animated.View>
 

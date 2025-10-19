@@ -69,10 +69,11 @@ const QRBackgroundOptionsPage: React.FC<QRBackgroundOptionsPageProps> = ({
                 <ThemeText theme={theme}>Padding</ThemeText>
                 <Slider
                     style={{ width: '100%', height: moderateScale(40) }}
-                    minimumValue={0}
-                    maximumValue={15}
+                    minimumValue={0.1}
+                    maximumValue={0.5}
                     minimumTrackTintColor={COLORS[theme].primary}
                     maximumTrackTintColor={COLORS[theme].border}
+                    step={0.05}
                     value={padding}
                     onSlidingComplete={setPadding}
                     thumbTintColor={COLORS[theme].primary}
