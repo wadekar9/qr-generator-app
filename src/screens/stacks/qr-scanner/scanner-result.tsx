@@ -9,13 +9,14 @@ import { styling } from './styles';
 import { useQRHandler } from '$hooks/module';
 import { IconButton, ThemeText } from '$components/ui';
 import { QR_ACTIONS_COMMON } from '$constants/qr-actions.constants';
+import { AppLoaderModal } from '$components/modal';
 
 const ScannerResult: React.FC<RootStackScreenProps<EStackScreens.SCANNER_RESULT>> = ({ route }) => {
     const { value } = route.params;
     const { theme, colors } = useAppTheme();
     const styles = styling(theme);
 
-    const { parsed, qrActions, handleAction, handleShare, handleCopy, IconComponent } = useQRHandler(value);
+    const { parsed, qrActions, handleAction, handleShare, handleCopy, IconComponent, loading } = useQRHandler(value);
 
     return (
         <ThemedView>
@@ -51,6 +52,8 @@ const ScannerResult: React.FC<RootStackScreenProps<EStackScreens.SCANNER_RESULT>
                     </View>
                 </ScrollView>
             </View>
+
+            {loading && <AppLoaderModal key={'qr-action-app-loading'} />}
         </ThemedView>
     );
 };

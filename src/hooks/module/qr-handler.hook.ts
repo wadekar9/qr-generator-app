@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Linking, Platform, ToastAndroid } from 'react-native';
 import WifiManager from 'react-native-wifi-reborn';
 import { parseQrValue, ParsedQr } from '$utils/qr-scanner-helpers';
@@ -12,6 +12,7 @@ import { requestLocationPermissions } from '$utils/permissions';
 
 export const useQRHandler = (rawValue: string) => {
     const parsed: ParsedQr = useMemo(() => parseQrValue(rawValue), [rawValue]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const actionLabel = useMemo(() => {
         switch (parsed.type) {
@@ -29,16 +30,17 @@ export const useQRHandler = (rawValue: string) => {
 
     const handleAction = useCallback(async (action: string) => {
         try {
+            setLoading(true);
             switch (action) {
 
                 case 'show-map':
-                    await Linking.openURL(`geo:${parsed.data.lat},${parsed.data.lng}?q=${parsed.data.lat},${parsed.data.lng}(${parsed.data.label || 'Location'})`);
+                    await Linking.openURL(`geo:${parsed.data.lat},${parsed.data.lng}?q=${parsed.data.label || ''}`);
                     break;
                 case 'get-directions':
                     await Linking.openURL(`google.navigation:q=${parsed.data.lat},${parsed.data.lng}&mode=d`);
                     break;
                 case 'web-search':
-                    await Linking.openURL(`https://www.google.com/search?q=${parsed.data.query}`);
+                    await Linking.openURL(`https://www.google.com/search?q=${parsed.data.text}`);
                     break;
                 case 'open-link':
                     await Linking.openURL(parsed.data.url);
@@ -79,6 +81,8 @@ export const useQRHandler = (rawValue: string) => {
                 message: 'Failed to process QR code',
                 type: 'danger'
             });
+        } finally {
+            setLoading(false);
         }
     }, [parsed]);
 
@@ -108,7 +112,7 @@ export const useQRHandler = (rawValue: string) => {
         return QR_ACTIONS.filter((action) => action.type === parsed.type);
     }, [QR_ACTIONS, parsed.type]);
 
-    return { parsed, actionLabel, handleAction, handleShare, handleCopy, IconComponent, qrActions };
+    return { parsed, actionLabel, handleAction, handleShare, handleCopy, IconComponent, qrActions, loading };
 };
 
 
