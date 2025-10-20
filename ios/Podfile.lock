@@ -1238,6 +1238,27 @@ PODS:
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
+  - react-native-cameraroll (7.10.2):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - react-native-hole-view (3.0.1):
     - DoubleConversion
     - glog
@@ -1763,6 +1784,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNFS (2.20.0):
+    - React-Core
   - RNGestureHandler (2.28.0):
     - DoubleConversion
     - glog
@@ -1974,6 +1997,27 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNShare (12.0.9):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNSVG (15.12.1):
     - DoubleConversion
     - glog
@@ -2141,6 +2185,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
   - react-native-hole-view (from `../node_modules/react-native-hole-view`)
   - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
   - "react-native-netinfo (from `../node_modules/@react-native-community/netinfo`)"
@@ -2177,12 +2222,14 @@ DEPENDENCIES:
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNQrGenerator (from `../node_modules/rn-qr-generator`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNWorklets (from `../node_modules/react-native-worklets`)
   - VisionCamera (from `../node_modules/react-native-vision-camera`)
@@ -2270,6 +2317,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-cameraroll:
+    :path: "../node_modules/@react-native-camera-roll/camera-roll"
   react-native-hole-view:
     :path: "../node_modules/react-native-hole-view"
   react-native-keyboard-controller:
@@ -2342,6 +2391,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageCropPicker:
@@ -2354,6 +2405,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNShare:
+    :path: "../node_modules/react-native-share"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNWorklets:
@@ -2401,6 +2454,7 @@ SPEC CHECKSUMS:
   React-logger: e6c3c1b55c18cc1b945b647ff9ada53e0e710b50
   React-Mapbuffer: 396d97d3534fa0df8c1a690eb6269d8a7d9f5b0e
   React-microtasksnativemodule: 9f9819152d22361967a6dfaaca7828af37b0ae70
+  react-native-cameraroll: ac7c6a1c30d14d5c843331dd55be0c7f079be527
   react-native-hole-view: 2f9883ed7edb094204890adf9ea84f7328ace087
   react-native-keyboard-controller: aa67d2de4f5e08f890ee491351f333ca73533b81
   react-native-netinfo: f0a9899081c185db1de5bb2fdc1c88c202a059ac
@@ -2437,12 +2491,14 @@ SPEC CHECKSUMS:
   RNBootSplash: 85b58e4edba342515528e3507c20b3f862d220e7
   RNCAsyncStorage: efa02b644121f4e1f7f33e712f4f82c30aa4ff4a
   RNDateTimePicker: 7edbe5f412406ba5b1e65fdcfe8d4925940364f9
+  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: ab7287c9593b75911be221b6c97d7ae6e02652e6
   RNImageCropPicker: 24d000ef063f9867e98e68585ff947b55fab15c7
   RNPermissions: 10b454768bd94c07806e5641ac86bfff46258294
   RNQrGenerator: 74236c6cfa29b97bf7de0ddb78e2c3212cf22bf7
   RNReanimated: 8584029268ad7715739705803351c25862bb10a1
   RNScreens: 8ec75e583592881a5365c85dc5430225d5fc614b
+  RNShare: 6b1ee93f4fce1346c7c299c3107af20af05120b4
   RNSVG: 082ae2874b288a96c95326c4f6029793f7009d4b
   RNWorklets: b761beb21b1478ba536cb68376678f3b2e45daaa
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
