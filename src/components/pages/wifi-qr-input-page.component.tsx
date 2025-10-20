@@ -1,10 +1,10 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react'
 import { BaseQRInputPageProps, BaseQRInputPageRef } from '$types/common.types'
-import { BaseCheckbox, BaseDropdown, BaseLabelCheckbox, BaseTextInput, ThemeText } from '$components/ui'
+import { BaseCheckbox, BaseDropdown, BaseLabelCheckbox, BaseSwitch, BaseTextInput, ThemeText } from '$components/ui'
 import { Controller, useForm } from 'react-hook-form'
 import { wifiQrValidator, WifiQrValidatorSchema } from '$validators/wifi-qr.validator'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { TextInput } from 'react-native'
+import { TextInput, View } from 'react-native'
 import { WIFI_TYPES } from '$constants/app.constants'
 import { stackNavigationRef } from '$types/navigation.types'
 import { CommonActions } from '@react-navigation/native'
@@ -100,11 +100,13 @@ const WifiQRInputPage = forwardRef<BaseQRInputPageRef, BaseQRInputPageProps>(({ 
                 control={control}
                 name='hidden'
                 render={({ field: { value, onChange } }) => (
-                    <BaseLabelCheckbox
-                        value={value}
-                        onValueChange={onChange}
-                        label='Hidden'
-                    />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <ThemeText theme={theme}>Hidden Network</ThemeText>
+                        <BaseSwitch
+                            value={value}
+                            onValueChange={onChange}
+                        />
+                    </View>
                 )}
             />
         </>
