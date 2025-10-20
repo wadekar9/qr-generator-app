@@ -1,5 +1,5 @@
 import { COLORS } from "$constants/colors.constants";
-import { DEVICE_HEIGHT, DEVICE_WIDTH, moderateScale } from "$constants/styles.constants";
+import { DEVICE_HEIGHT, DEVICE_WIDTH, EFontSize, moderateScale } from "$constants/styles.constants";
 import { ITheme } from "$types/common.types";
 import { StyleSheet } from "react-native";
 
@@ -94,5 +94,50 @@ export const styling = (theme: ITheme) => StyleSheet.create({
     },
     buttonTextStyle: {
         color: COLORS[theme].white
+    },
+    detailText: {
+        fontSize: EFontSize.XL,
+        color: COLORS[theme].text,
+        textAlign: 'left'
+    },
+    typeText: {
+        fontSize: EFontSize['2XL'],
+        color: COLORS[theme].primary,
+    },
+    contentContainer: {
+        flexGrow: 1,
+    },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: moderateScale(10),
+        paddingHorizontal: moderateScale(20),
+        paddingVertical: moderateScale(12),
+    },
+    content: {
+        backgroundColor: COLORS[theme].surface,
+        padding: moderateScale(20)
+    },
+    actions: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        paddingHorizontal: moderateScale(20),
+        paddingVertical: moderateScale(12),
+        marginVertical: moderateScale(10)
+    },
+    action: {
+        width: '32%',
+        height: undefined,
+        aspectRatio: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: moderateScale(5)
+    },
+    actionText: {
+        fontSize: EFontSize.LG,
+        color: COLORS[theme].primary,
+        textAlign: 'center'
     }
 })

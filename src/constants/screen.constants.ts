@@ -5,6 +5,7 @@ export enum EStackScreens {
     QR_SCANNER = 'QRScanner',
     QR_GENERATOR = 'QRGenerator',
     QR_STYLING = 'QRStyling',
+    SCANNER_RESULT = 'ScannerResult',
 }
 
 export enum EBottomTabScreens {

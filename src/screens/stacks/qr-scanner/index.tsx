@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Alert, SafeAreaView, StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Alert, StyleSheet, ToastAndroid, TouchableOpacity, View } from 'react-native';
 import {
     Camera,
     CameraProps,
@@ -32,7 +32,6 @@ const QRScanner: React.FC<RootStackScreenProps<EStackScreens.QR_SCANNER>> = ({ n
     const [isCameraInitialized, setIsCameraInitialized] = useState(false);
     const [isActive, setIsActive] = useState(true);
     const [flash, setFlash] = useState<'on' | 'off'>('off');
-    const [QRCodeResponse, setQRCodeResponse] = useState<string | undefined>(undefined);
     const [showLoader, setShowLoader] = useState<boolean>(false);
 
     const isFocused = useIsFocused();
@@ -64,7 +63,7 @@ const QRScanner: React.FC<RootStackScreenProps<EStackScreens.QR_SCANNER>> = ({ n
                 })
 
                 if (QRResult.type === 'QRCode') {
-                    console.log("QRResult", QRResult);
+                    navigation.navigate(EStackScreens.SCANNER_RESULT, { value: QRResult.values[0] })
                     setShowLoader(false);
                 } else {
                     setShowLoader(false);
@@ -104,10 +103,10 @@ const QRScanner: React.FC<RootStackScreenProps<EStackScreens.QR_SCANNER>> = ({ n
 
     const codeScanner = useCodeScanner({
         codeTypes: ['qr'],
-        onCodeScanned: codes => {
-            if (codes.length && !QRCodeResponse) {
-                console.log("codes", codes); //READ ECONOMICS TIMES PAPER
-                setQRCodeResponse(codes[0].value!)
+        onCodeScanned: (codes) => {
+            if (codes.length > 0 && codes[0].value) {
+                console.log("codes[0].value", codes[0].value)
+                // navigation.navigate(EStackScreens.SCANNER_RESULT, { value: codes[0].value! })
             }
             return;
         },

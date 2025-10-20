@@ -13,6 +13,7 @@ export type RootStackParamsList = {
     [EStackScreens.BOTTOM_TAB_NAVIGATOR]: undefined;
     [EStackScreens.HISTORY]: undefined;
     [EStackScreens.QR_SCANNER]: undefined;
+    [EStackScreens.SCANNER_RESULT]: { value: string; };
     [EStackScreens.QR_GENERATOR]: { type: QRType };
     [EStackScreens.QR_STYLING]: { type: QRType, data: string };
     [EStackScreens.QR_RESULT]: { base64: string; };
