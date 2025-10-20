@@ -8,6 +8,7 @@ import { Type } from 'lucide-react-native';
 import RNShare from 'react-native-share';
 import { QR_ACTIONS } from '$constants/qr-actions.constants';
 import Clipboard from '@react-native-clipboard/clipboard';
+import { requestLocationPermissions } from '$utils/permissions';
 
 export const useQRHandler = (rawValue: string) => {
     const parsed: ParsedQr = useMemo(() => parseQrValue(rawValue), [rawValue]);
@@ -47,6 +48,7 @@ export const useQRHandler = (rawValue: string) => {
                     break;
                 case 'connect':
                     if (Platform.OS === 'android') {
+                        await requestLocationPermissions();
                         await WifiManager.connectToProtectedSSID(
                             parsed.data.ssid,
                             parsed.data.password,

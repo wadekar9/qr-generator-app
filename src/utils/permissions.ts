@@ -1,3 +1,4 @@
+import { EPermissions } from '$constants/permissions.constants';
 import { Platform } from 'react-native';
 import { PERMISSIONS, requestMultiple, Permission } from 'react-native-permissions';
 
@@ -6,7 +7,7 @@ type PlatformPermissions = {
     ios: Permission[];
 };
 
-interface PermissionResult {
+export interface PermissionResult {
     granted: boolean;
     error?: Error;
 }
@@ -18,9 +19,9 @@ abstract class BasePermissionHandler {
         try {
             const platformPermissions = this.getPlatformPermissions();
             const result = await requestMultiple(platformPermissions);
-            return {
-                granted: this.validatePermissionResult(result),
-            };
+            const granted = this.validatePermissionResult(result);
+
+            return { granted };
         } catch (error) {
             return {
                 granted: false,
@@ -34,7 +35,7 @@ abstract class BasePermissionHandler {
             android: this.permissions.android,
             ios: this.permissions.ios,
             default: [],
-        });
+        }) as Permission[];
     }
 
     protected abstract validatePermissionResult(result: Record<string, string>): boolean;
@@ -47,14 +48,13 @@ class CameraPermissionHandler extends BasePermissionHandler {
     };
 
     protected validatePermissionResult(result: Record<string, string>): boolean {
-        return Platform.select({
+        const granted = Platform.select({
             android: result['android.permission.CAMERA'] === 'granted',
             ios: result['ios.permission.CAMERA'] === 'granted',
-            default: false,
         });
+        return granted ?? false;
     }
 }
-
 
 class MediaPermissionHandler extends BasePermissionHandler {
     protected permissions: PlatformPermissions = {
@@ -67,14 +67,14 @@ class MediaPermissionHandler extends BasePermissionHandler {
     };
 
     protected validatePermissionResult(result: Record<string, string>): boolean {
-        return Platform.select({
+        const granted = Platform.select({
             android:
                 result['android.permission.READ_EXTERNAL_STORAGE'] === 'granted' ||
                 result['android.permission.WRITE_EXTERNAL_STORAGE'] === 'granted' ||
                 result['android.permission.READ_MEDIA_IMAGES'] === 'granted',
             ios: result['ios.permission.PHOTO_LIBRARY'] === 'granted',
-            default: false,
         });
+        return granted ?? false;
     }
 }
 
@@ -88,18 +88,19 @@ class LocationPermissionHandler extends BasePermissionHandler {
     };
 
     protected validatePermissionResult(result: Record<string, string>): boolean {
-        return Platform.select({
+        const granted = Platform.select({
             android:
                 result['android.permission.ACCESS_COARSE_LOCATION'] === 'granted' ||
                 result['android.permission.ACCESS_FINE_LOCATION'] === 'granted',
             ios: result['ios.permission.LOCATION_WHEN_IN_USE'] === 'granted',
-            default: false,
         });
+        return granted ?? false;
     }
 }
+
 class PermissionManager {
     private static instance: PermissionManager;
-    private handlers: Map<string, BasePermissionHandler>;
+    private handlers: Map<EPermissions, BasePermissionHandler>;
 
     private constructor() {
         this.handlers = new Map();
@@ -114,12 +115,12 @@ class PermissionManager {
     }
 
     private initializeHandlers(): void {
-        this.handlers.set('camera', new CameraPermissionHandler());
-        this.handlers.set('media', new MediaPermissionHandler());
-        this.handlers.set('location', new LocationPermissionHandler());
+        this.handlers.set(EPermissions.CAMERA, new CameraPermissionHandler());
+        this.handlers.set(EPermissions.MEDIA, new MediaPermissionHandler());
+        this.handlers.set(EPermissions.LOCATION, new LocationPermissionHandler());
     }
 
-    public async requestPermission(type: string): Promise<PermissionResult> {
+    public async requestPermission(type: EPermissions): Promise<PermissionResult> {
         const handler = this.handlers.get(type);
         if (!handler) {
             return {
@@ -127,23 +128,29 @@ class PermissionManager {
                 error: new Error(`Unknown permission type: ${type}`),
             };
         }
-        return handler.requestPermission();
+
+        const result = await handler.requestPermission();
+        if (!result.granted) {
+            console.warn(`[PermissionManager] ${type} permission denied`);
+        }
+
+        return result;
     }
 }
 
 export const permissionManager = PermissionManager.getInstance();
 
 export const requestCameraPermissions = async (): Promise<boolean> => {
-    const result = await permissionManager.requestPermission('camera');
+    const result = await permissionManager.requestPermission(EPermissions.CAMERA);
     return result.granted;
 };
 
 export const requestMediaPermissions = async (): Promise<boolean> => {
-    const result = await permissionManager.requestPermission('media');
+    const result = await permissionManager.requestPermission(EPermissions.MEDIA);
     return result.granted;
 };
 
 export const requestLocationPermissions = async (): Promise<boolean> => {
-    const result = await permissionManager.requestPermission('location');
+    const result = await permissionManager.requestPermission(EPermissions.LOCATION);
     return result.granted;
 };
