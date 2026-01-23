@@ -10,8 +10,10 @@ const ThemedSafeAreaView: React.FC<ThemedViewProps> = ({ children }) => {
     const { colors, insets } = useAppTheme();
 
     return (
-        <View style={[styles.container, { backgroundColor: colors.background, paddingTop: insets.top }]}>
-            {children}
+        <View style={[styles.container, { backgroundColor: colors.primary, paddingTop: insets.top }]}>
+            <View style={[styles.container, { backgroundColor: colors.background }]}>
+                {children}
+            </View>
         </View>
     );
 };

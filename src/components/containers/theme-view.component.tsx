@@ -10,8 +10,8 @@ const ThemedView: React.FC<ThemedViewProps> = ({ children }) => {
     const { colors, insets } = useAppTheme();
 
     return (
-        <View style={[styles.container, { backgroundColor: colors.background, paddingTop: insets.top, paddingBottom: insets.bottom }]}>
-            <View style={styles.container}>
+        <View style={[styles.container, { backgroundColor: colors.primary, paddingTop: insets.top }]}>
+            <View style={[styles.container, { backgroundColor: colors.background, paddingBottom: insets.bottom }]}>
                 {children}
             </View>
         </View>
