@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { stackNavigationRef, RootStackParamsList } from '$types/navigation.types';
 import { EStackScreens } from '$constants/screen.constants';
 import { StacksRoutes } from './routes';
 import BottomTabNavigator from './bottom-tab-navigator';
+import BootSplash from "react-native-bootsplash";
 
 const RootStack = createNativeStackNavigator<RootStackParamsList>();
 
 const RootStackNavigator = () => {
+
+    useEffect(() => {
+        (() => BootSplash.hide({ fade: true }))();
+    }, [])
+
     return (
         <NavigationContainer ref={stackNavigationRef}>
             <RootStack.Navigator
