@@ -1,4 +1,4 @@
-package com.qrgeneratorapp
+package com.thinkheadlabs.qrscancraft.qrcode.qrscanner.qrgenerator.qrdesigner
 
 import android.app.Application
 import com.facebook.react.PackageList

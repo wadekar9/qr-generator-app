@@ -1,5 +1,5 @@
 {
-  "name": "react-native-boilerplate",
+  "name": "qrscancraft",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -13,9 +13,9 @@
     "android:clean": "cd android && gradle clean && cd ..",
     "android:release": "npx react-native run-android --variant=release",
     "android:apk": "cd android && ./gradlew assembleRelease",
-    "android:keystore": "keytool -genkeypair -v -keystore android/app/production-release.keystore -alias QRForge -keyalg RSA -keysize 2048 -validity 10000",
-    "android:sha256": "keytool -list -v -keystore android/app/production-release.keystore -alias QRForge -storepass QRF0rge@#2025 -keypass QRF0rge@#2025",
-    "ios:clean": "xcodebuild clean -workspace QRGeneratorApp.xcworkspace -scheme QRGeneratorApp -configuration Debug",
+    "android:keystore": "keytool -genkeypair -v -keystore android/app/production-release.keystore -alias qrscancraft -keyalg RSA -keysize 2048 -validity 10000",
+    "android:sha256": "keytool -list -v -keystore android/app/production-release.keystore -alias qrscancraft -storepass QRsc@ncr@FT@#2025 -keypass QRsc@ncr@FT@#2025",
+    "ios:clean": "xcodebuild clean -workspace qrscancraft.xcworkspace -scheme qrscancraft -configuration Debug",
     "pod:ios": "cd ios && RCT_NEW_ARCH_ENABLED=0 pod install && cd .."
   },
   "dependencies": {

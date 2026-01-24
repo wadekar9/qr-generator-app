@@ -7,6 +7,7 @@
     </style>
 
     <style name="BootTheme" parent="Theme.BootSplash">
+        <item name="colorPrimaryDark">@color/primary</item>
         <item name="bootSplashBackground">@color/primary</item>
         <item name="bootSplashLogo">@drawable/bootsplash_logo</item>
         <item name="postBootSplashTheme">@style/AppTheme</item>

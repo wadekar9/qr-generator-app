@@ -1,4 +1,4 @@
-package com.qrgeneratorapp
+package com.thinkheadlabs.qrscancraft.qrcode.qrscanner.qrgenerator.qrdesigner
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
