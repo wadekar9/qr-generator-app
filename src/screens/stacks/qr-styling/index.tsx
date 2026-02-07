@@ -142,7 +142,7 @@ const QRStyling: React.FC<RootStackScreenProps<EStackScreens.QR_STYLING>> = ({ n
         return (
             <IconButton onPress={() => onChooseTab(idx)} style={styles.tabSection}>
                 <Icon size={22} color={activeTab === idx ? colors.primary : colors.text1} />
-                <Text style={[styles.tabSectionText, activeTab === idx && styles.tabSectionTextActive]}>{QR_STYLING_OPTIONS[idx].label}</Text>
+                <Text numberOfLines={1} style={[styles.tabSectionText, activeTab === idx && styles.tabSectionTextActive]}>{QR_STYLING_OPTIONS[idx].label}</Text>
             </IconButton>
         )
     }, [QR_STYLING_OPTIONS, colors, activeTab, onChooseTab])

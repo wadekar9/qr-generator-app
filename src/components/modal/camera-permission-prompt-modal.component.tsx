@@ -42,7 +42,7 @@ const CameraPermissionPromptModal = forwardRef<CameraPermissionPromptModalRef, C
         >
             <View style={styles.wrapper}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>{'Camera Permission'}</Text>
+                    <Text numberOfLines={1} style={styles.title}>{'Camera Permission'}</Text>
 
                     <Text numberOfLines={3} style={styles.message}>{'Allow Prism to access your camera to scan QR codes.'}</Text>
 

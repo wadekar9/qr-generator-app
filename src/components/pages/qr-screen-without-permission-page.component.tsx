@@ -20,14 +20,14 @@ const QRScreenWithoutPermissionPage: React.FC<QRScreenWithoutPermissionPageProps
         <SafeAreaView style={styles.container}>
             <View style={styles.container}>
                 <Camera size={moderateScale(64)} color={COLORS[props.theme].text4} />
-                <Text style={[styles.message, { color: COLORS[props.theme].text }]}>
+                <Text numberOfLines={2} style={[styles.message, { color: COLORS[props.theme].text }]}>
                     Camera permission is required to scan QR codes
                 </Text>
                 <TouchableOpacity
                     style={[styles.permissionButton, { backgroundColor: COLORS[props.theme].primary }]}
                     onPress={props.requestPermission}
                 >
-                    <Text style={styles.permissionButtonText}>Grant Permission</Text>
+                    <Text numberOfLines={1} style={styles.permissionButtonText}>Grant Permission</Text>
                 </TouchableOpacity>
                 <TextButton label='Go Back' labelStyle={styles.subMessage} onPress={() => stackNavigationRef.current?.goBack()} />
             </View>

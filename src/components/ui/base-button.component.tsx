@@ -43,7 +43,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
             style={$wrapperStyle}
         >
             {!!LeftAccessory && LeftAccessory}
-            <Text style={[styles.label, labelStyle]}>{label}</Text>
+            <Text numberOfLines={1} style={[styles.label, labelStyle]}>{label}</Text>
             {!!RightAccessory && RightAccessory}
         </Pressable>
     )

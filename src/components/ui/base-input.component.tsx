@@ -75,7 +75,7 @@ const BaseTextInput = React.forwardRef<BaseTextInputRef, BaseTextInputProps>(({
 
     return (
         <View style={styles.wrapper}>
-            {label && <Text style={styles.label}>{label}</Text>}
+            {label && <Text numberOfLines={1} style={styles.label}>{label}</Text>}
             <View style={[styles.containerWrapper, { opacity: disabled ? 0.6 : 1 }, isFocused && { borderColor: colors.primary }]}>
                 <View style={[styles.container, $EXTRA_STYLES]}>
                     {!!LeftAccessory && (<View style={styles.icon}>{LeftAccessory}</View>)}

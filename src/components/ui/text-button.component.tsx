@@ -24,7 +24,7 @@ const TextButton: React.FC<TextButtonProps> = ({
             disabled={disabled}
             onPress={onPress}
         >
-            <Text style={[styles.label, labelStyle]}>{label}</Text>
+            <Text numberOfLines={1} style={[styles.label, labelStyle]}>{label}</Text>
         </TouchableOpacity>
     )
 }

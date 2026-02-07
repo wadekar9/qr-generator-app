@@ -56,7 +56,7 @@ const BaseDatePicker: React.FC<BaseDatePickerProps> = ({
 
     return (
         <View style={styles.wrapper}>
-            {label && <Text style={styles.label}>{label}</Text>}
+            {label && <Text numberOfLines={1} style={styles.label}>{label}</Text>}
             <Pressable
                 style={[styles.container, { opacity: disabled ? 0.5 : 1 }]}
                 onPress={showPicker}
@@ -66,7 +66,7 @@ const BaseDatePicker: React.FC<BaseDatePickerProps> = ({
                     <CalendarDays width={moderateScale(25)} height={moderateScale(25)} color={colors.text} />
                 </View>
                 <View style={styles.content}>
-                    {value ? (<Text style={styles.value}>{formatDate(value)}</Text>) : (<Text style={[styles.value, styles.placeholder]}>{placeholder}</Text>)}
+                    {value ? (<Text numberOfLines={1} style={styles.value}>{formatDate(value)}</Text>) : (<Text numberOfLines={1} style={[styles.value, styles.placeholder]}>{placeholder}</Text>)}
                 </View>
             </Pressable>
 

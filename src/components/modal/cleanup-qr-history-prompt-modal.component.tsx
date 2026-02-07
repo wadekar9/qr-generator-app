@@ -38,7 +38,7 @@ const CleanupQRHistoryPromptModal = forwardRef<CleanupQRHistoryPromptModalRef, C
         >
             <View style={styles.wrapper}>
                 <View style={styles.container}>
-                    <Text style={styles.title}>{'Clear History'}</Text>
+                    <Text numberOfLines={1} style={styles.title}>{'Clear History'}</Text>
 
                     <Text numberOfLines={3} style={styles.message}>{'Are you sure you want to clear your history?'}</Text>
 
