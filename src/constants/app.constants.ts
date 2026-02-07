@@ -17,6 +17,10 @@ import {
     Type
 } from 'lucide-react-native';
 
+export const APP_NAME = "QRScanCraft";
+export const APP_VERSION = "1.0.0";
+export const APP_PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.thinkheadlabs.qrscancraft.qrcode.qrscanner.qrgenerator.qrdesigner";
+
 export const QR_TYPES: { type: QRType; label: string; icon: any }[] = [
     { type: 'text', label: 'Text', icon: Type },
     { type: 'url', label: 'URL', icon: Globe },

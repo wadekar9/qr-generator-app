@@ -7,6 +7,8 @@ import { Image } from 'react-native-image-crop-picker';
 import { getData, storeData } from './storage';
 import { EStorageKeys } from '$constants/storage.constants';
 import { IHistory } from '$types/history.types';
+import { Share } from 'react-native';
+import { APP_NAME, APP_PLAY_STORE_URL } from '$constants/app.constants';
 
 export const formatDate = (timestamp: number) => {
     const date = new Date(timestamp);
@@ -144,5 +146,14 @@ export async function getQRHistory(): Promise<IHistory[]> {
     } catch (error) {
         console.error("ERROR", error);
         return [];
+    }
+}
+
+export const shareAppDetails = async () => {
+    try {
+        const message = `📱 Discovered ${APP_NAME} - the ultimate tool for all your QR code needs! 🚀\n\nScan, Generate, and Customize QR codes effortlessly. Support for Wi-Fi, Contacts, URLs, and more. \n\nGet it here: ${APP_PLAY_STORE_URL}`;
+        await Share.share({ message });
+    } catch (error) {
+        console.error("ERROR", error);
     }
 }

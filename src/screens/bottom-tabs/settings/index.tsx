@@ -18,6 +18,8 @@ import { ThemedSafeAreaView } from '$components/containers';
 import { styling } from './styles';
 import { SettingsItem } from '$components/layouts';
 import { BaseSwitch, ThemeText } from '$components/ui';
+import { APP_PLAY_STORE_URL } from '$constants/app.constants';
+import { shareAppDetails } from '$utils/helpers';
 
 const Settings: React.FC<BottomTabStackScreenProps<EBottomTabScreens.SETTINGS>> = () => {
 
@@ -59,7 +61,7 @@ const Settings: React.FC<BottomTabStackScreenProps<EBottomTabScreens.SETTINGS>> 
                     Icon={<Share color={colors.primary} width={24} height={24} />}
                     title="Share"
                     subtitle="Share app with friends"
-                    onPress={() => ShareNative.share({ message: 'QR Generator App' })}
+                    onPress={() => shareAppDetails()}
                 />
 
                 <SettingsItem
@@ -67,7 +69,7 @@ const Settings: React.FC<BottomTabStackScreenProps<EBottomTabScreens.SETTINGS>> 
                     Icon={<Smartphone color={colors.primary} width={24} height={24} />}
                     title="Rate App"
                     subtitle="Help us improve"
-                    onPress={() => Linking.openURL('https://play.google.com/store/apps/details?id=com.qrgeneratorapp')}
+                    onPress={() => Linking.openURL(APP_PLAY_STORE_URL)}
                 />
             </ScrollView>
         </ThemedSafeAreaView>

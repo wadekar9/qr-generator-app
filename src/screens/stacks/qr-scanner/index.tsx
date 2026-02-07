@@ -105,8 +105,7 @@ const QRScanner: React.FC<RootStackScreenProps<EStackScreens.QR_SCANNER>> = ({ n
         codeTypes: ['qr'],
         onCodeScanned: (codes) => {
             if (codes.length > 0 && codes[0].value) {
-                console.log("codes[0].value", codes[0].value)
-                // navigation.navigate(EStackScreens.SCANNER_RESULT, { value: codes[0].value! })
+                navigation.navigate(EStackScreens.SCANNER_RESULT, { value: codes[0].value })
             }
             return;
         },
